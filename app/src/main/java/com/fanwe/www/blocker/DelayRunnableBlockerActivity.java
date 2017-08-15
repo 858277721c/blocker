@@ -20,7 +20,7 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_runnable_blocker);
+        setContentView(R.layout.activity_delay_runnable_blocker);
 
         mRunnableBlocker.setDelayDuration(1000); //设置Runnable延迟多久执行
         mRunnableBlocker.setMaxBlockCount(9); //设置拦截间隔内最大可以拦截9次，超过9次则立即执行
