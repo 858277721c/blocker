@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     public void onClickRunnable(View v)
     {
-        startActivity(new Intent(this, RunnableBlockerActivity.class));
+        startActivity(new Intent(this, DelayRunnableBlockerActivity.class));
     }
 
 }

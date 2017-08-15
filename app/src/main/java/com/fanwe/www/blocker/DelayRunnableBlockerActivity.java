@@ -10,9 +10,9 @@ import com.fanwe.library.blocker.SDDelayRunnableBlocker;
 import com.fanwe.library.looper.ISDLooper;
 import com.fanwe.library.looper.impl.SDSimpleLooper;
 
-public class RunnableBlockerActivity extends AppCompatActivity
+public class DelayRunnableBlockerActivity extends AppCompatActivity
 {
-    private static final String TAG = "RunnableBlockerActivity";
+    private static final String TAG = "DelayRunnableBlockerActivity";
 
     private SDDelayRunnableBlocker mRunnableBlocker = new SDDelayRunnableBlocker();
 
