@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this, OnClickBlockerActivity.class));
     }
 
-    public void onClickObject(View v)
+    public void onClickRunnable(View v)
     {
-        startActivity(new Intent(this, ObjectBlockerActivity.class));
+        startActivity(new Intent(this, RunnableBlockerActivity.class));
     }
 
 }
