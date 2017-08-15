@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickBlocker"
-        android:text="点击拦截demo"/>
-
+        android:text="onClick拦截demo"/>
 
 </LinearLayout>
