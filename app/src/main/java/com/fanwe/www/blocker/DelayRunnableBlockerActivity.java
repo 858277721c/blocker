@@ -38,15 +38,17 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
             @Override
             public void run()
             {
+                mRequestCount++;
                 //模拟每隔100毫秒触发一次的场景
                 mRunnableBlocker.post(mRunnable, 2000); //延迟2000毫秒后执行Runnable
 
                 TextView textView = (TextView) findViewById(R.id.tv_block_msg);
-                textView.setText("拦截次数：" + mRunnableBlocker.getBlockCount());
+                textView.setText("请求执行次数：" + mRequestCount);
             }
         });
     }
 
+    private int mRequestCount;
     private int mCount;
     /**
      * 模拟耗性能Runnable
@@ -58,7 +60,7 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
         {
             mCount++;
             TextView textView = (TextView) findViewById(R.id.tv_msg);
-            textView.setText(String.valueOf(mCount));
+            textView.setText("耗性能任务执行：" + String.valueOf(mCount) + "次");
         }
     };
 

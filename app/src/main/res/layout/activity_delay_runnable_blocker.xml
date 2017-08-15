@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickStart"
-        android:text="触发一次"/>
+        android:text="模拟触发一次请求"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickStart500"
-        android:text="500毫秒触发一次"/>
+        android:text="模拟500毫秒触发一次请求"/>
 
     <TextView
         android:id="@+id/tv_block_msg"
