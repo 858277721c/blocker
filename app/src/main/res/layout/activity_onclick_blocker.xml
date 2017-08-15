@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="未拦截"/>
+
+    <Button
+        android:id="@+id/btn_global"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="全局拦截，拦截间隔1秒"/>
+
+    <Button
+        android:id="@+id/btn_private"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单独view拦截，拦截间隔2秒"/>
+
+    <TextView
+        android:id="@+id/tv_click_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"/>
+
+</LinearLayout>
