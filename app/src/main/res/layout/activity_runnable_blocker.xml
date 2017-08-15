@@ -8,12 +8,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickStart"
-        android:text="模拟触发一次请求"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:onClick="onClickStart500"
         android:text="模拟500毫秒触发一次请求"/>
 

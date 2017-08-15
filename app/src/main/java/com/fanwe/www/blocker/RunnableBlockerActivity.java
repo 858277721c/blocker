@@ -1,0 +1,66 @@
+package com.fanwe.www.blocker;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
+
+import com.fanwe.library.blocker.SDRunnableBlocker;
+import com.fanwe.library.looper.ISDLooper;
+import com.fanwe.library.looper.impl.SDSimpleLooper;
+
+public class RunnableBlockerActivity extends AppCompatActivity
+{
+    private TextView tv_block_msg, tv_msg;
+
+    private SDRunnableBlocker mRunnableBlocker = new SDRunnableBlocker();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_runnable_blocker);
+        tv_block_msg = (TextView) findViewById(R.id.tv_block_msg);
+        tv_msg = (TextView) findViewById(R.id.tv_msg);
+    }
+
+    private ISDLooper mLooper = new SDSimpleLooper();
+    private int mRequestCount;
+    private int mRealCount;
+
+    public void onClickStart500(View view)
+    {
+        mRunnableBlocker.setMaxBlockCount(3); //设置延迟间隔内最大可以拦截3次，超过3次则立即执行
+        mLooper.start(500, new Runnable() //模拟每隔500毫秒请求执行一次的场景
+        {
+            @Override
+            public void run()
+            {
+                mRunnableBlocker.postDelayed(mTargetRunnable, 2000); //延迟2000毫秒后执行Runnable
+
+                mRequestCount++;
+                tv_block_msg.setText("请求执行次数：" + mRequestCount);
+            }
+        });
+    }
+
+    /**
+     * 模拟耗性能Runnable
+     */
+    private Runnable mTargetRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            mRealCount++;
+            tv_msg.setText("实际执行次数：" + String.valueOf(mRealCount));
+        }
+    };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mLooper.stop();
+    }
+}

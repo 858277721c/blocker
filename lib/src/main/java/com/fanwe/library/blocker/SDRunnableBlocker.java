@@ -5,13 +5,13 @@ import android.os.Looper;
 
 /**
  * 实现带拦截功能的延迟执行某个Runnable<br>
- * 当调用post方法post一个延迟Runable之后，会有以下3种情况：<br>
+ * 当调用postDelayed方法post一个延迟Runable之后，会有以下3种情况：<br>
  * 1.如果在延迟间隔内没有再次post，则延迟间隔到后执行该Runnable<br>
  * 2.如果在延迟间隔内再次post，并且拦截次数小于最大拦截次数，则取消已经post的延迟Runnable，重新post当前延迟Runnable，拦截次数加一<br>
  * 3.如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
  * 在界面销毁的时候需要调用onDestroy()
  */
-public class SDDelayRunnableBlocker
+public class SDRunnableBlocker
 {
     /**
      * 最大拦截次数
@@ -32,7 +32,7 @@ public class SDDelayRunnableBlocker
      * @param maxBlockCount
      * @return
      */
-    public synchronized SDDelayRunnableBlocker setMaxBlockCount(int maxBlockCount)
+    public synchronized SDRunnableBlocker setMaxBlockCount(int maxBlockCount)
     {
         mMaxBlockCount = maxBlockCount;
         return this;
@@ -98,7 +98,7 @@ public class SDDelayRunnableBlocker
         @Override
         public void run()
         {
-            synchronized (SDDelayRunnableBlocker.this)
+            synchronized (SDRunnableBlocker.this)
             {
                 resetBlockCount();
                 if (mBlockRunnable != null)

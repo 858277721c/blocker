@@ -20,7 +20,7 @@
         <activity android:name=".DurationBlockerActivity"/>
         <activity android:name=".OnClickBlockerActivity"/>
         <activity android:name=".ObjectBlockerActivity"/>
-        <activity android:name=".DelayRunnableBlockerActivity"/>
+        <activity android:name=".RunnableBlockerActivity"/>
     </application>
 
 </manifest>

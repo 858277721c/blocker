@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this, ObjectBlockerActivity.class));
     }
 
-    public void onClickDelayRunnable(View v)
+    public void onClickRunnable(View v)
     {
-        startActivity(new Intent(this, DelayRunnableBlockerActivity.class));
+        startActivity(new Intent(this, RunnableBlockerActivity.class));
     }
 
 }
