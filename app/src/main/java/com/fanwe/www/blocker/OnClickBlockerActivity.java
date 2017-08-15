@@ -26,36 +26,33 @@ public class OnClickBlockerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                increaseClickCount(); //更新点击次数
+                mClickCount++;
+                tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
             }
         });
 
-        //全局拦截Button，1000毫秒才可以触发一次
+        //全局拦截Button，拦截间隔为1000毫秒
         SDOnClickBlocker.setGlobalBlockDuration(1000); //设置全局拦截间隔
         SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_global), new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                increaseClickCount(); //更新点击次数
+                mClickCount++;
+                tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
             }
         });
 
-        //单独拦截Button，2000毫秒才可以触发一次
+        //单独拦截Button，拦截间隔为2000毫秒
         SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                increaseClickCount(); //更新点击次数
+                mClickCount++;
+                tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
             }
         });
-    }
-
-    private void increaseClickCount()
-    {
-        mClickCount++;
-        tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
     }
 
 }
