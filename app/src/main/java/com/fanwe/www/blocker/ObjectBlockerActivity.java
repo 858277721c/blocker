@@ -30,7 +30,7 @@ public class ObjectBlockerActivity extends AppCompatActivity
         btn_send_msg = (Button) findViewById(R.id.btn_send_msg);
 
         mObjectBlocker.setBlockDuration(1000); //设置拦截间隔，既不管是否重复，最快只能1秒触发一次
-        mObjectBlocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断重复时长
+        mObjectBlocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断和上一次重复之间的时长
         mObjectBlocker.setBlockEqualsObjectDuration(3000); //拦截重复的时长，既3秒内不允许有重复的
 
         btn_send_msg.setOnClickListener(new View.OnClickListener()
@@ -47,15 +47,16 @@ public class ObjectBlockerActivity extends AppCompatActivity
 
                 if (mObjectBlocker.block())
                 {
-                    Toast.makeText(ObjectBlockerActivity.this, "输入太频繁，消息间隔不能小于1秒", 1).show();
+                    Toast.makeText(ObjectBlockerActivity.this, "消息间隔不能小于1秒", 1).show();
                     return;
                 }
                 if (mObjectBlocker.blockObject(msg))
                 {
-                    Toast.makeText(ObjectBlockerActivity.this, "请勿刷屏，重复消息间隔不能小于3秒", 1).show();
+                    Toast.makeText(ObjectBlockerActivity.this, "重复消息间隔不能小于3秒", 1).show();
                     return;
                 }
 
+                tv_msg.append("\r\n" + msg);
             }
         });
     }
