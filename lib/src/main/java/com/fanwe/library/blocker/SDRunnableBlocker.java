@@ -21,10 +21,7 @@ public class SDRunnableBlocker
      * 当前已拦截次数
      */
     private int mBlockCount = 0;
-    /**
-     * 需要拦截的Runnable
-     */
-    private Runnable mBlockRunnable;
+    private Runnable mTargetRunnable;
 
     /**
      * 设置最大拦截次数
@@ -66,7 +63,7 @@ public class SDRunnableBlocker
      */
     public synchronized boolean postDelayed(Runnable runnable, long delay)
     {
-        mBlockRunnable = runnable;
+        mTargetRunnable = runnable;
 
         if (mMaxBlockCount > 0)
         {
@@ -74,24 +71,24 @@ public class SDRunnableBlocker
             if (mBlockCount > mMaxBlockCount)
             {
                 // 大于最大拦截次数，立即执行Runnable
-                mDelayRunnable.runImmediately();
+                mInternalRunnable.runImmediately();
                 return true;
             } else
             {
-                mDelayRunnable.runDelayOrImmediately(delay);
+                mInternalRunnable.runDelayOrImmediately(delay);
                 return false;
             }
         } else
         {
             // 没有设置最大拦截次数，立即执行Runnable
-            mDelayRunnable.runImmediately();
+            mInternalRunnable.runImmediately();
             return true;
         }
     }
 
-    private DelayRunnable mDelayRunnable = new DelayRunnable();
+    private InternalRunnable mInternalRunnable = new InternalRunnable();
 
-    private class DelayRunnable implements Runnable
+    private class InternalRunnable implements Runnable
     {
         private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -101,9 +98,9 @@ public class SDRunnableBlocker
             synchronized (SDRunnableBlocker.this)
             {
                 resetBlockCount();
-                if (mBlockRunnable != null)
+                if (mTargetRunnable != null)
                 {
-                    mBlockRunnable.run();
+                    mTargetRunnable.run();
                 }
             }
         }
@@ -150,7 +147,7 @@ public class SDRunnableBlocker
      */
     public synchronized void onDestroy()
     {
-        mDelayRunnable.removeDelay();
-        mBlockRunnable = null;
+        mInternalRunnable.removeDelay();
+        mTargetRunnable = null;
     }
 }
