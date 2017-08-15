@@ -26,7 +26,7 @@ public class OnClickBlockerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                increaseClickCount();
+                increaseClickCount(); //更新点击次数
             }
         });
 
@@ -37,7 +37,7 @@ public class OnClickBlockerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                increaseClickCount();
+                increaseClickCount(); //更新点击次数
             }
         });
 
@@ -47,7 +47,7 @@ public class OnClickBlockerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                increaseClickCount();
+                increaseClickCount(); //更新点击次数
             }
         });
     }
@@ -55,7 +55,7 @@ public class OnClickBlockerActivity extends AppCompatActivity
     private void increaseClickCount()
     {
         mClickCount++;
-        tv_click_count.setText(String.valueOf(mClickCount));
+        tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
     }
 
 }
