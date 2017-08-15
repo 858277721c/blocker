@@ -21,6 +21,7 @@ public class SDRunnableBlocker
      * 当前已拦截次数
      */
     private int mBlockCount = 0;
+    private InternalRunnable mInternalRunnable;
     private Runnable mTargetRunnable;
 
     /**
@@ -71,22 +72,29 @@ public class SDRunnableBlocker
             if (mBlockCount > mMaxBlockCount)
             {
                 // 大于最大拦截次数，立即执行Runnable
-                mInternalRunnable.runImmediately();
+                getInternalRunnable().runImmediately();
                 return true;
             } else
             {
-                mInternalRunnable.runDelayOrImmediately(delay);
+                getInternalRunnable().runDelay(delay);
                 return false;
             }
         } else
         {
             // 没有设置最大拦截次数，立即执行Runnable
-            mInternalRunnable.runImmediately();
+            getInternalRunnable().runImmediately();
             return true;
         }
     }
 
-    private InternalRunnable mInternalRunnable = new InternalRunnable();
+    private InternalRunnable getInternalRunnable()
+    {
+        if (mInternalRunnable == null)
+        {
+            mInternalRunnable = new InternalRunnable();
+        }
+        return mInternalRunnable;
+    }
 
     private class InternalRunnable implements Runnable
     {
@@ -105,27 +113,16 @@ public class SDRunnableBlocker
             }
         }
 
-        public final void runDelay(long delay)
-        {
-            removeDelay();
-            mHandler.postDelayed(this, delay);
-        }
-
         public final void runImmediately()
         {
             removeDelay();
             run();
         }
 
-        public final void runDelayOrImmediately(long delay)
+        public final void runDelay(long delay)
         {
-            if (delay > 0)
-            {
-                runDelay(delay);
-            } else
-            {
-                runImmediately();
-            }
+            removeDelay();
+            mHandler.postDelayed(this, delay);
         }
 
         public final void removeDelay()
@@ -147,7 +144,10 @@ public class SDRunnableBlocker
      */
     public synchronized void onDestroy()
     {
-        mInternalRunnable.removeDelay();
-        mTargetRunnable = null;
+        if (mInternalRunnable != null)
+        {
+            mInternalRunnable.removeDelay();
+            mTargetRunnable = null;
+        }
     }
 }
