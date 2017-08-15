@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     }
 
+    public void onClickDuration(View v)
+    {
+        startActivity(new Intent(this, DurationBlockerActivity.class));
+    }
+
     public void onClickBlocker(View v)
     {
         startActivity(new Intent(this, OnClickBlockerActivity.class));

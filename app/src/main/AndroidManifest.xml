@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".DurationBlockerActivity"/>
         <activity android:name=".OnClickBlockerActivity"/>
         <activity android:name=".ObjectBlockerActivity"/>
     </application>

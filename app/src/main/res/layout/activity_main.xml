@@ -8,6 +8,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onClickDuration"
+        android:text="Duration拦截demo"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="onClickBlocker"
         android:text="onClick拦截demo"/>
 
