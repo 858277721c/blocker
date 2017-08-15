@@ -26,7 +26,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickRunnable"
+        android:onClick="onClickDelayRunnable"
         android:text="Runnable拦截demo"/>
 
 </LinearLayout>
