@@ -2,60 +2,66 @@ package com.fanwe.www.blocker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.library.blocker.SDOnClickBlocker;
+import com.fanwe.library.blocker.SDDelayRunnableBlocker;
+import com.fanwe.library.looper.ISDLooper;
+import com.fanwe.library.looper.impl.SDSimpleLooper;
 
 public class RunnableBlockerActivity extends AppCompatActivity
 {
+    private static final String TAG = "RunnableBlockerActivity";
 
-    private TextView tv_click_count;
-    private int mClickCount;
+    private SDDelayRunnableBlocker mRunnableBlocker = new SDDelayRunnableBlocker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onclick_blocker);
-        tv_click_count = (TextView) findViewById(R.id.tv_click_count);
+        setContentView(R.layout.activity_runnable_blocker);
 
-        //未拦截Button
-        findViewById(R.id.btn_normal).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                increaseClickCount(); //更新点击次数
-            }
-        });
-
-        //全局拦截Button，1000毫秒才可以触发一次
-        SDOnClickBlocker.setGlobalBlockDuration(1000); //设置全局拦截间隔
-        SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_global), new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                increaseClickCount(); //更新点击次数
-            }
-        });
-
-        //单独拦截Button，2000毫秒才可以触发一次
-        SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                increaseClickCount(); //更新点击次数
-            }
-        });
+        mRunnableBlocker.setDelayDuration(1000); //设置Runnable延迟多久执行
+        mRunnableBlocker.setMaxBlockCount(9); //设置拦截间隔内最大可以拦截9次，超过9次则立即执行
     }
 
-    private void increaseClickCount()
+    private ISDLooper mLooper = new SDSimpleLooper();
+
+    public void onClickStart100(View view)
     {
-        mClickCount++;
-        tv_click_count.setText(String.valueOf(mClickCount)); //更新点击次数
+        mCount = 0;
+        mLooper.start(100, new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                //每隔100毫秒触发一次
+                mRunnableBlocker.post(mRunnable);
+                Log.i(TAG, "拦截次数：" + mRunnableBlocker.getBlockCount());
+            }
+        });
     }
 
+    private int mCount;
+    /**
+     * 模拟耗性能Runnable
+     */
+    private Runnable mRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            mCount++;
+            TextView textView = (TextView) findViewById(R.id.tv_msg);
+            textView.setText(String.valueOf(mCount));
+        }
+    };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mLooper.stop();
+    }
 }
