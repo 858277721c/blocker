@@ -5,9 +5,10 @@ import android.os.Looper;
 
 /**
  * 实现带拦截功能的延迟执行某个Runnable<br>
- * 1.如果在延迟间隔内没有再触发该Runnable，则延迟间隔到后执行Runnable<br>
- * 2.如果在延迟间隔内有再触发该Runnable，如果拦截次数小于设置的最大拦截次数，则拦截掉此次触发动作<br>
- * 3.如果在延迟间隔内有再触发该Runnable，如果拦截次数大于设置的最大拦截次数，则立即执行此次触发动作<br>
+ * 当调用post方法post一个延迟Runable之后，会有以下3种情况：<br>
+ * 1.如果在延迟间隔内没有再次post，则延迟间隔到后执行该Runnable<br>
+ * 2.如果在延迟间隔内再次post，并且拦截次数小于最大拦截次数，则取消已经post的延迟Runnable，重新post当前延迟Runnable，拦截次数加一<br>
+ * 3.如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
  * 在界面销毁的时候需要调用onDestroy()
  */
 public class SDDelayRunnableBlocker
@@ -66,30 +67,25 @@ public class SDDelayRunnableBlocker
     public synchronized boolean post(Runnable runnable, long delay)
     {
         mBlockRunnable = runnable;
-        if (mBlockRunnable != null)
+
+        if (mMaxBlockCount > 0)
         {
-            if (mMaxBlockCount > 0)
+            mBlockCount++;
+            if (mBlockCount > mMaxBlockCount)
             {
-                mBlockCount++;
-                if (mBlockCount > mMaxBlockCount)
-                {
-                    // 大于最大拦截次数，立即执行Runnable
-                    mDelayRunnable.runImmediately();
-                    return true;
-                } else
-                {
-                    mDelayRunnable.runDelayOrImmediately(delay);
-                    return false;
-                }
-            } else
-            {
-                // 没有设置最大拦截次数，立即执行Runnable
+                // 大于最大拦截次数，立即执行Runnable
                 mDelayRunnable.runImmediately();
                 return true;
+            } else
+            {
+                mDelayRunnable.runDelayOrImmediately(delay);
+                return false;
             }
         } else
         {
-            return false;
+            // 没有设置最大拦截次数，立即执行Runnable
+            mDelayRunnable.runImmediately();
+            return true;
         }
     }
 
@@ -104,9 +100,9 @@ public class SDDelayRunnableBlocker
         {
             synchronized (SDDelayRunnableBlocker.this)
             {
+                resetBlockCount();
                 if (mBlockRunnable != null)
                 {
-                    resetBlockCount();
                     mBlockRunnable.run();
                 }
             }
