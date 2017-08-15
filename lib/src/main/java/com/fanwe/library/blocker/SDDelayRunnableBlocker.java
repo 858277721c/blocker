@@ -64,7 +64,7 @@ public class SDDelayRunnableBlocker
      * @param delay 延迟间隔（毫秒）
      * @return true-立即执行，false-延迟执行
      */
-    public synchronized boolean post(Runnable runnable, long delay)
+    public synchronized boolean postDelayed(Runnable runnable, long delay)
     {
         mBlockRunnable = runnable;
 

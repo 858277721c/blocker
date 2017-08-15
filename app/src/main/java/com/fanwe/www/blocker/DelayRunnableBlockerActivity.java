@@ -28,7 +28,7 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
 
     public void onClickStart(View view)
     {
-        mRunnableBlocker.post(mRunnable, 1000); //延迟1000毫秒后执行Runnable
+        mRunnableBlocker.postDelayed(mRunnable, 1000); //延迟1000毫秒后执行Runnable
     }
 
     public void onClickStart500(View view)
@@ -40,7 +40,7 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
             {
                 mRequestCount++;
                 //模拟每隔100毫秒触发一次的场景
-                mRunnableBlocker.post(mRunnable, 2000); //延迟2000毫秒后执行Runnable
+                mRunnableBlocker.postDelayed(mRunnable, 2000); //延迟2000毫秒后执行Runnable
 
                 TextView textView = (TextView) findViewById(R.id.tv_block_msg);
                 textView.setText("请求执行次数：" + mRequestCount);
