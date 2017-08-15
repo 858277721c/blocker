@@ -59,3 +59,8 @@ SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new Vi
     }
 });
 ```
+## SDObjectBlocker
+继承自SDDurationBlocker，增加可以拦截重复对象的功能<br>
+应用场景：直播间聊天公屏要求用户发消息限制为最快只能2秒发一次，并且如果有重复的消息的话必须间隔5秒才能发<br>
+效果图：<br>
+![](http://thumbsnap.com/i/KXXZyARA.gif?0815)<br>
