@@ -64,3 +64,36 @@ SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new Vi
 应用场景：直播间聊天公屏要求用户发消息限制为最快只能2秒发一次，并且如果有重复的消息的话必须间隔5秒才能发<br>
 效果图：<br>
 ![](http://thumbsnap.com/i/KXXZyARA.gif?0815)<br>
+```java
+final SDObjectBlocker mObjectBlocker = new SDObjectBlocker();
+mObjectBlocker.setBlockDuration(2000); //设置拦截间隔，既不管是否重复，最快只能2000毫秒触发一次
+mObjectBlocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断和上一次重复之间的时长
+mObjectBlocker.setBlockEqualsObjectDuration(5000); //拦截重复的时长，既5000毫秒内不允许有重复的
+
+btn_send_msg.setOnClickListener(new View.OnClickListener()
+{
+    @Override
+    public void onClick(View v)
+    {
+        String msg = et.getText().toString();
+        if (TextUtils.isEmpty(msg))
+        {
+            Toast.makeText(ObjectBlockerActivity.this, "请输入消息", 0).show();
+            return;
+        }
+
+        if (mObjectBlocker.block())
+        {
+            Toast.makeText(ObjectBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
+            return;
+        }
+        if (mObjectBlocker.blockObject(msg))
+        {
+            Toast.makeText(ObjectBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
+            return;
+        }
+
+        tv_msg.append("\r\n" + msg);
+    }
+});
+```
