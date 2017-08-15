@@ -36,7 +36,7 @@ findViewById(R.id.btn_normal).setOnClickListener(new View.OnClickListener()
     }
 });
 
-//全局拦截Button，1000毫秒才可以触发一次
+//全局拦截Button，拦截间隔为1000毫秒
 SDOnClickBlocker.setGlobalBlockDuration(1000); //设置全局拦截间隔
 SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_global), new View.OnClickListener()
 {
@@ -48,7 +48,7 @@ SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_global), new View.OnCl
     }
 });
 
-//单独拦截Button，2000毫秒才可以触发一次
+//单独拦截Button，拦截间隔为2000毫秒
 SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new View.OnClickListener()
 {
     @Override
