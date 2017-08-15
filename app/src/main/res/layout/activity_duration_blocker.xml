@@ -9,6 +9,6 @@
         android:id="@+id/btn_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发送消息"/>
+        android:text="点击"/>
 
 </LinearLayout>
