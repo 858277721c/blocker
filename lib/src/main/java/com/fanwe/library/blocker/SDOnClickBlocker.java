@@ -5,7 +5,7 @@ import android.view.View;
 /**
  * OnClickListener点击拦截
  */
-public class SDOnClickBlocker implements View.OnClickListener
+public class SDOnClickBlocker
 {
     private View.OnClickListener mOriginal;
     private static SDDurationBlocker sGlobalBlocker = new SDDurationBlocker(500);
@@ -24,29 +24,32 @@ public class SDOnClickBlocker implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onClick(View v)
+    View.OnClickListener mInternalOnClickListener = new View.OnClickListener()
     {
-        if (mPrivateBlocker != null)
+        @Override
+        public void onClick(View v)
         {
-            if (mPrivateBlocker.block())
+            if (mPrivateBlocker != null)
             {
-                //拦截掉
+                if (mPrivateBlocker.block())
+                {
+                    //拦截掉
+                } else
+                {
+                    mOriginal.onClick(v);
+                }
             } else
             {
-                mOriginal.onClick(v);
-            }
-        } else
-        {
-            if (sGlobalBlocker.block())
-            {
-                //拦截掉
-            } else
-            {
-                mOriginal.onClick(v);
+                if (sGlobalBlocker.block())
+                {
+                    //拦截掉
+                } else
+                {
+                    mOriginal.onClick(v);
+                }
             }
         }
-    }
+    };
 
     /**
      * 设置全局拦截间隔
@@ -92,7 +95,7 @@ public class SDOnClickBlocker implements View.OnClickListener
         }
 
         SDOnClickBlocker blocker = new SDOnClickBlocker(onClickListener, blockDuration);
-        view.setOnClickListener(blocker);
+        view.setOnClickListener(blocker.mInternalOnClickListener);
     }
 
 }
