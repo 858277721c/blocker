@@ -4,15 +4,18 @@ import android.os.Handler;
 import android.os.Looper;
 
 /**
- * 实现某个时段内重复Runnable的拦截，当拦截次数超过最大拦截次数后则执行Runnable<br>
+ * 实现带拦截功能的延迟执行某个Runnable<br>
+ * 1.如果在延迟间隔内没有再触发该Runnable，则延迟间隔到后执行Runnable<br>
+ * 2.如果在延迟间隔内有再触发该Runnable，如果拦截次数小于设置的最大拦截次数，则拦截掉此次触发动作<br>
+ * 3.如果在延迟间隔内有再触发该Runnable，如果拦截次数大于设置的最大拦截次数，则立即执行此次触发动作<br>
  * 在界面销毁的时候需要调用onDestroy()
  */
-public class SDRunnableBlocker
+public class SDDelayRunnableBlocker
 {
     /**
-     * 拦截间隔
+     * Runnable延迟多久执行
      */
-    private long mBlockDuration = 0;
+    private long mDelayDuration = 0;
     /**
      * 最大拦截次数
      */
@@ -27,14 +30,14 @@ public class SDRunnableBlocker
     private Runnable mBlockRunnable;
 
     /**
-     * 设置拦截间隔
+     * 设置Runnable延迟多久执行
      *
-     * @param blockDuration
+     * @param delayDuration
      * @return
      */
-    public synchronized SDRunnableBlocker setBlockDuration(long blockDuration)
+    public synchronized SDDelayRunnableBlocker setDelayDuration(long delayDuration)
     {
-        mBlockDuration = blockDuration;
+        mDelayDuration = delayDuration;
         return this;
     }
 
@@ -44,20 +47,20 @@ public class SDRunnableBlocker
      * @param maxBlockCount
      * @return
      */
-    public synchronized SDRunnableBlocker setMaxBlockCount(int maxBlockCount)
+    public synchronized SDDelayRunnableBlocker setMaxBlockCount(int maxBlockCount)
     {
         mMaxBlockCount = maxBlockCount;
         return this;
     }
 
     /**
-     * 返回拦截间隔
+     * 返回Runnable延迟多久执行
      *
      * @return
      */
-    public synchronized long getBlockDuration()
+    public synchronized long getDelayDuration()
     {
-        return mBlockDuration;
+        return mDelayDuration;
     }
 
     /**
@@ -100,7 +103,7 @@ public class SDRunnableBlocker
                     return true;
                 } else
                 {
-                    mDelayRunnable.runDelayOrImmediately(mBlockDuration);
+                    mDelayRunnable.runDelayOrImmediately(mDelayDuration);
                     return false;
                 }
             } else
@@ -124,7 +127,7 @@ public class SDRunnableBlocker
         @Override
         public void run()
         {
-            synchronized (SDRunnableBlocker.this)
+            synchronized (SDDelayRunnableBlocker.this)
             {
                 if (mBlockRunnable != null)
                 {
