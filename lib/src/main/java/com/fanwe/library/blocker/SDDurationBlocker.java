@@ -17,11 +17,11 @@ public class SDDurationBlocker
     /**
      * 最后一次保存的触发拦截时间
      */
-    private long mLastTime;
+    private long mLastBlockTime;
     /**
      * 是否自动保存最后一次触发拦截的时间，默认自动保存
      */
-    private boolean mAutoSaveLastTime = true;
+    private boolean mAutoSaveLastBlockTime = true;
 
     public SDDurationBlocker()
     {
@@ -49,27 +49,27 @@ public class SDDurationBlocker
      *
      * @return
      */
-    public long getLastTime()
+    public long getLastBlockTime()
     {
-        return mLastTime;
+        return mLastBlockTime;
     }
 
     /**
      * 保存最后一次触发拦截的时间
      */
-    public synchronized void saveLastTime()
+    public synchronized void saveLastBlockTime()
     {
-        mLastTime = System.currentTimeMillis();
+        mLastBlockTime = System.currentTimeMillis();
     }
 
     /**
      * 设置是否自动保存最后一次触发拦截的时间，默认自动保存
      *
-     * @param autoSaveLastTime true-自动保存
+     * @param autoSaveLastBlockTime true-自动保存
      */
-    public synchronized void setAutoSaveLastTime(boolean autoSaveLastTime)
+    public synchronized void setAutoSaveLastBlockTime(boolean autoSaveLastBlockTime)
     {
-        this.mAutoSaveLastTime = autoSaveLastTime;
+        mAutoSaveLastBlockTime = autoSaveLastBlockTime;
     }
 
     /**
@@ -83,7 +83,7 @@ public class SDDurationBlocker
         {
             blockDuration = 0;
         }
-        this.mBlockDuration = blockDuration;
+        mBlockDuration = blockDuration;
     }
 
     /**
@@ -93,7 +93,7 @@ public class SDDurationBlocker
      */
     public synchronized boolean isInBlockDuration()
     {
-        long duration = System.currentTimeMillis() - mLastTime;
+        long duration = System.currentTimeMillis() - mLastBlockTime;
         return duration < mBlockDuration;
     }
 
@@ -110,9 +110,9 @@ public class SDDurationBlocker
             return true;
         }
 
-        if (mAutoSaveLastTime)
+        if (mAutoSaveLastBlockTime)
         {
-            saveLastTime();
+            saveLastBlockTime();
         }
         return false;
     }

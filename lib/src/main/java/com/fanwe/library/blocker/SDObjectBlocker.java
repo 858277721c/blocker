@@ -25,7 +25,7 @@ public class SDObjectBlocker extends SDDurationBlocker
     public SDObjectBlocker()
     {
         super();
-        setAutoSaveLastTime(false);
+        setAutoSaveLastBlockTime(false);
     }
 
     /**
@@ -45,7 +45,7 @@ public class SDObjectBlocker extends SDDurationBlocker
      */
     public synchronized boolean isInBlockEqualsObjectDuration()
     {
-        long duration = System.currentTimeMillis() - getLastTime();
+        long duration = System.currentTimeMillis() - getLastBlockTime();
         return duration < mBlockEqualsObjectDuration;
     }
 
@@ -96,7 +96,7 @@ public class SDObjectBlocker extends SDDurationBlocker
             resetEqualsCount();
         }
 
-        saveLastTime();
+        saveLastBlockTime();
         setLastObject(object);
         return false;
     }
