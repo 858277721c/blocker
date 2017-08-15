@@ -7,9 +7,10 @@ import android.view.View;
  */
 public class SDOnClickBlocker
 {
-    private View.OnClickListener mOriginal;
-    private static SDDurationBlocker sGlobalBlocker = new SDDurationBlocker(500);
+    private static final SDDurationBlocker GLOBAL_BLOCKER = new SDDurationBlocker(500);
     private SDDurationBlocker mPrivateBlocker;
+
+    private View.OnClickListener mOriginal;
 
     SDOnClickBlocker(View.OnClickListener original, long blockDuration)
     {
@@ -40,7 +41,7 @@ public class SDOnClickBlocker
                 }
             } else
             {
-                if (sGlobalBlocker.block())
+                if (GLOBAL_BLOCKER.block())
                 {
                     //拦截掉
                 } else
@@ -58,7 +59,7 @@ public class SDOnClickBlocker
      */
     public static void setGlobalBlockDuration(long blockDuration)
     {
-        sGlobalBlocker.setBlockDuration(blockDuration);
+        GLOBAL_BLOCKER.setBlockDuration(blockDuration);
     }
 
     /**
