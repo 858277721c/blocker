@@ -13,10 +13,6 @@ import android.os.Looper;
 public class SDDelayRunnableBlocker
 {
     /**
-     * Runnable延迟多久执行
-     */
-    private long mDelayDuration = 0;
-    /**
      * 最大拦截次数
      */
     private int mMaxBlockCount = 0;
@@ -30,18 +26,6 @@ public class SDDelayRunnableBlocker
     private Runnable mBlockRunnable;
 
     /**
-     * 设置Runnable延迟多久执行
-     *
-     * @param delayDuration
-     * @return
-     */
-    public synchronized SDDelayRunnableBlocker setDelayDuration(long delayDuration)
-    {
-        mDelayDuration = delayDuration;
-        return this;
-    }
-
-    /**
      * 设置最大拦截次数
      *
      * @param maxBlockCount
@@ -51,16 +35,6 @@ public class SDDelayRunnableBlocker
     {
         mMaxBlockCount = maxBlockCount;
         return this;
-    }
-
-    /**
-     * 返回Runnable延迟多久执行
-     *
-     * @return
-     */
-    public synchronized long getDelayDuration()
-    {
-        return mDelayDuration;
     }
 
     /**
@@ -84,11 +58,12 @@ public class SDDelayRunnableBlocker
     }
 
     /**
-     * 执行Runnable
+     * 延迟执行Runnable
      *
-     * @return true-立即执行成功，false-拦截掉
+     * @param delay 延迟间隔（毫秒）
+     * @return true-立即执行，false-延迟执行
      */
-    public synchronized boolean post(Runnable runnable)
+    public synchronized boolean post(Runnable runnable, long delay)
     {
         mBlockRunnable = runnable;
         if (mBlockRunnable != null)
@@ -103,7 +78,7 @@ public class SDDelayRunnableBlocker
                     return true;
                 } else
                 {
-                    mDelayRunnable.runDelayOrImmediately(mDelayDuration);
+                    mDelayRunnable.runDelayOrImmediately(delay);
                     return false;
                 }
             } else
