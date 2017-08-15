@@ -8,9 +8,20 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickStart100"
-        android:text="100毫秒触发一次"/>
+        android:onClick="onClickStart"
+        android:text="触发一次"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickStart500"
+        android:text="500毫秒触发一次"/>
+
+    <TextView
+        android:id="@+id/tv_block_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/tv_msg"

@@ -2,7 +2,6 @@ package com.fanwe.www.blocker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,23 +21,28 @@ public class DelayRunnableBlockerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delay_runnable_blocker);
 
-        mRunnableBlocker.setDelayDuration(1000); //设置Runnable延迟多久执行
-        mRunnableBlocker.setMaxBlockCount(9); //设置拦截间隔内最大可以拦截9次，超过9次则立即执行
+        mRunnableBlocker.setMaxBlockCount(3); //设置延迟间隔内最大可以拦截3次，超过3次则立即执行
     }
 
     private ISDLooper mLooper = new SDSimpleLooper();
 
-    public void onClickStart100(View view)
+    public void onClickStart(View view)
     {
-        mCount = 0;
-        mLooper.start(100, new Runnable()
+        mRunnableBlocker.post(mRunnable, 1000); //延迟1000毫秒后执行Runnable
+    }
+
+    public void onClickStart500(View view)
+    {
+        mLooper.start(500, new Runnable()
         {
             @Override
             public void run()
             {
-                //每隔100毫秒触发一次
-                mRunnableBlocker.post(mRunnable);
-                Log.i(TAG, "拦截次数：" + mRunnableBlocker.getBlockCount());
+                //模拟每隔100毫秒触发一次的场景
+                mRunnableBlocker.post(mRunnable, 2000); //延迟2000毫秒后执行Runnable
+
+                TextView textView = (TextView) findViewById(R.id.tv_block_msg);
+                textView.setText("拦截次数：" + mRunnableBlocker.getBlockCount());
             }
         });
     }
