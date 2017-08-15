@@ -5,16 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
+    <TextView
+        android:id="@+id/tv_msg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickBlocker"
-        android:text="onClick拦截demo"/>
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/btn_send_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickObject"
-        android:text="Object拦截demo"/>
+        android:text="发送消息"/>
 
 </LinearLayout>

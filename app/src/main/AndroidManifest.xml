@@ -18,7 +18,7 @@
         </activity>
 
         <activity android:name=".OnClickBlockerActivity"/>
-
+        <activity android:name=".ObjectBlockerActivity"/>
     </application>
 
 </manifest>
