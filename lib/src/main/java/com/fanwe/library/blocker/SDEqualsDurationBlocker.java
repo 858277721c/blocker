@@ -20,6 +20,7 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
     @Override
     public synchronized void setAutoSaveLastBlockTime(boolean autoSaveLastBlockTime)
     {
+        // 强制设置为false，不自动保存
         super.setAutoSaveLastBlockTime(false);
     }
 
@@ -30,7 +31,17 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
      */
     public synchronized void setBlockEqualsDuration(long blockEqualsDuration)
     {
-        this.mBlockEqualsDuration = blockEqualsDuration;
+        mBlockEqualsDuration = blockEqualsDuration;
+    }
+
+    /**
+     * 设置最大可以equals的次数
+     *
+     * @param maxEqualsCount
+     */
+    public synchronized void setMaxEqualsCount(int maxEqualsCount)
+    {
+        mEqualsBlocker.setMaxEqualsCount(maxEqualsCount);
     }
 
     /**
@@ -42,16 +53,6 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
     {
         long duration = System.currentTimeMillis() - getLastBlockTime();
         return duration < mBlockEqualsDuration;
-    }
-
-    /**
-     * 设置最大可以equals的次数
-     *
-     * @param maxEqualsCount
-     */
-    public synchronized void setMaxEqualsCount(int maxEqualsCount)
-    {
-        mEqualsBlocker.setMaxEqualsCount(maxEqualsCount);
     }
 
     /**
