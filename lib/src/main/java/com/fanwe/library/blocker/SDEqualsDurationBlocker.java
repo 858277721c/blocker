@@ -14,14 +14,14 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
     public SDEqualsDurationBlocker()
     {
         super();
-        setAutoSaveLastBlockTime(false);
+        setAutoSaveLastLegalTime(false);
     }
 
     @Override
-    public synchronized void setAutoSaveLastBlockTime(boolean autoSaveLastBlockTime)
+    public synchronized void setAutoSaveLastLegalTime(boolean autoSaveLastLegalTime)
     {
         // 强制设置为false，不自动保存
-        super.setAutoSaveLastBlockTime(false);
+        super.setAutoSaveLastLegalTime(false);
     }
 
     /**
@@ -51,7 +51,7 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
      */
     public synchronized boolean isInBlockEqualsDuration()
     {
-        long duration = System.currentTimeMillis() - getLastBlockTime();
+        long duration = System.currentTimeMillis() - getLastLegalTime();
         return duration < mBlockEqualsDuration;
     }
 
@@ -71,7 +71,7 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
             }
         }
 
-        saveLastBlockTime();
+        saveLastLegalTime();
         return false;
     }
 }

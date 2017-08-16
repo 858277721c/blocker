@@ -15,13 +15,13 @@ public class SDDurationBlocker
      */
     private long mBlockDuration;
     /**
-     * 最后一次保存的触发拦截时间
+     * 最后一次通过拦截的合法时间点
      */
-    private long mLastBlockTime;
+    private long mLastLegalTime;
     /**
-     * 是否自动保存最后一次触发拦截的时间，默认自动保存
+     * 是否自动保存最后一次通过拦截的合法时间点，默认自动保存
      */
-    private boolean mAutoSaveLastBlockTime = true;
+    private boolean mAutoSaveLastLegalTime = true;
 
     public SDDurationBlocker()
     {
@@ -45,31 +45,31 @@ public class SDDurationBlocker
     }
 
     /**
-     * 获得最后一次保存的触发拦截时间
+     * 返回最后一次通过拦截的合法时间点
      *
      * @return
      */
-    public long getLastBlockTime()
+    public long getLastLegalTime()
     {
-        return mLastBlockTime;
+        return mLastLegalTime;
     }
 
     /**
-     * 保存最后一次触发拦截的时间
+     * 保存最后一次通过拦截的合法时间点
      */
-    public synchronized void saveLastBlockTime()
+    public synchronized void saveLastLegalTime()
     {
-        mLastBlockTime = System.currentTimeMillis();
+        mLastLegalTime = System.currentTimeMillis();
     }
 
     /**
      * 设置是否自动保存最后一次触发拦截的时间，默认自动保存
      *
-     * @param autoSaveLastBlockTime true-自动保存
+     * @param autoSaveLastLegalTime true-自动保存
      */
-    public synchronized void setAutoSaveLastBlockTime(boolean autoSaveLastBlockTime)
+    public synchronized void setAutoSaveLastLegalTime(boolean autoSaveLastLegalTime)
     {
-        mAutoSaveLastBlockTime = autoSaveLastBlockTime;
+        mAutoSaveLastLegalTime = autoSaveLastLegalTime;
     }
 
     /**
@@ -93,7 +93,7 @@ public class SDDurationBlocker
      */
     public synchronized boolean isInBlockDuration()
     {
-        long duration = System.currentTimeMillis() - mLastBlockTime;
+        long duration = System.currentTimeMillis() - mLastLegalTime;
         return duration < mBlockDuration;
     }
 
@@ -110,9 +110,9 @@ public class SDDurationBlocker
             return true;
         }
 
-        if (mAutoSaveLastBlockTime)
+        if (mAutoSaveLastLegalTime)
         {
-            saveLastBlockTime();
+            saveLastLegalTime();
         }
         return false;
     }
