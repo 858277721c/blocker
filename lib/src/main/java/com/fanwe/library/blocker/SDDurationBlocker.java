@@ -89,9 +89,10 @@ public class SDDurationBlocker
     /**
      * 当前是否处于拦截的间隔之内
      *
+     * @param blockDuration 拦截间隔（毫秒）
      * @return true-是
      */
-    public synchronized boolean isInBlockDuration()
+    public synchronized boolean isInBlockDuration(long blockDuration)
     {
         long duration = System.currentTimeMillis() - mLastLegalTime;
         return duration < mBlockDuration;
@@ -102,9 +103,20 @@ public class SDDurationBlocker
      *
      * @return true-拦截掉
      */
-    public synchronized boolean block()
+    public boolean block()
     {
-        if (isInBlockDuration())
+        return block(mBlockDuration);
+    }
+
+    /**
+     * 触发拦截
+     *
+     * @param blockDuration 拦截间隔（毫秒）
+     * @return true-拦截掉
+     */
+    public synchronized boolean block(long blockDuration)
+    {
+        if (isInBlockDuration(blockDuration))
         {
             // 拦截掉
             return true;
