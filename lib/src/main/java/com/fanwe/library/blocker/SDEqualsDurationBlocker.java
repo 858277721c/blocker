@@ -72,9 +72,9 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
      * @param object
      * @return true-拦截掉
      */
-    public synchronized boolean blockObject(Object object)
+    public synchronized boolean blockEquals(Object object)
     {
-        if (mEqualsBlocker.blockObject(object))
+        if (mEqualsBlocker.blockEquals(object))
         {
             if (isInBlockEqualsDuration())
             {

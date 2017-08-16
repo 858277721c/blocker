@@ -43,12 +43,12 @@ public class SDEqualsBlocker
     }
 
     /**
-     * 触发对象拦截
+     * 触发equals对象拦截
      *
      * @param object
      * @return true-拦截掉
      */
-    public synchronized boolean blockObject(Object object)
+    public synchronized boolean blockEquals(Object object)
     {
         if (mLastLegalObject.equals(object))
         {
