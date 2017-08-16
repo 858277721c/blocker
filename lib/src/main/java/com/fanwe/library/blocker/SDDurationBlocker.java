@@ -95,7 +95,7 @@ public class SDDurationBlocker
     public synchronized boolean isInBlockDuration(long blockDuration)
     {
         long duration = System.currentTimeMillis() - mLastLegalTime;
-        return duration < mBlockDuration;
+        return duration < blockDuration;
     }
 
     /**
