@@ -1,8 +1,9 @@
 package com.fanwe.library.blocker;
 
 /**
- * 可以根据时间间隔和对象equals()是否相等来拦截事件
+ * 用{@link SDEqualsDurationBlocker}替代
  */
+@Deprecated
 public class SDObjectBlocker extends SDDurationBlocker
 {
     /**
