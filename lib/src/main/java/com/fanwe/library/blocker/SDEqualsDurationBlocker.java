@@ -15,6 +15,7 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
     {
         super();
         setAutoSaveLastLegalTime(false);
+        mEqualsBlocker.setAutoSaveLastLegalObject(false);
     }
 
     @Override
@@ -45,6 +46,16 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
     }
 
     /**
+     * 保存最后一次通过拦截的合法对象
+     *
+     * @param lastLegalObject
+     */
+    public synchronized void saveLastLegalObject(Object lastLegalObject)
+    {
+        mEqualsBlocker.saveLastLegalObject(lastLegalObject);
+    }
+
+    /**
      * 当前是否处于拦截equals相同对象的间隔之内
      *
      * @return
@@ -70,8 +81,6 @@ public class SDEqualsDurationBlocker extends SDDurationBlocker
                 return true;
             }
         }
-
-        saveLastLegalTime();
         return false;
     }
 }
