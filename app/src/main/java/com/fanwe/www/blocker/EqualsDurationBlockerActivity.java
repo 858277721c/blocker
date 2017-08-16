@@ -28,8 +28,7 @@ public class EqualsDurationBlockerActivity extends AppCompatActivity
         btn_send_msg = (Button) findViewById(R.id.btn_send_msg);
 
         final SDEqualsDurationBlocker blocker = new SDEqualsDurationBlocker();
-        blocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断和上一次重复之间的时长
-
+        blocker.setMaxEqualsCount(0); //设置允许最大重复的次数0
         btn_send_msg.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -47,15 +46,11 @@ public class EqualsDurationBlockerActivity extends AppCompatActivity
                     Toast.makeText(EqualsDurationBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
                     return;
                 }
-                if (blocker.blockEquals(msg))
+                if (blocker.blockEquals(msg) && blocker.block(5000))
                 {
-                    //拦截到超过最大重复次数的点击
-                    if (blocker.block(5000))
-                    {
-                        //拦截到超过最大重复次数，并且间隔5000毫秒内的点击
-                        Toast.makeText(EqualsDurationBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
-                        return;
-                    }
+                    //拦截到超过最大重复次数，并且间隔5000毫秒内的点击
+                    Toast.makeText(EqualsDurationBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
+                    return;
                 }
                 blocker.saveLastLegalTime(); //保存通过拦截的合法时间点，下次判断用到
                 blocker.saveLastLegalObject(msg); //保存通过拦截的合法对象，下次判断用到
