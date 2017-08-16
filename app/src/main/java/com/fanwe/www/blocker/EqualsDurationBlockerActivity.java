@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.fanwe.library.blocker.SDEqualsDurationBlocker;
 
-public class ObjectBlockerActivity extends AppCompatActivity
+public class EqualsDurationBlockerActivity extends AppCompatActivity
 {
 
     private TextView tv_msg;
@@ -22,7 +22,7 @@ public class ObjectBlockerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_object_blocker);
+        setContentView(R.layout.activity_equals_duration_blocker);
         tv_msg = (TextView) findViewById(R.id.tv_msg);
         et = (EditText) findViewById(R.id.et);
         btn_send_msg = (Button) findViewById(R.id.btn_send_msg);
@@ -40,17 +40,17 @@ public class ObjectBlockerActivity extends AppCompatActivity
                 String msg = et.getText().toString();
                 if (TextUtils.isEmpty(msg))
                 {
-                    Toast.makeText(ObjectBlockerActivity.this, "请输入消息", 0).show();
+                    Toast.makeText(EqualsDurationBlockerActivity.this, "请输入消息", 0).show();
                     return;
                 }
                 if (blocker.block())
                 {
-                    Toast.makeText(ObjectBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
+                    Toast.makeText(EqualsDurationBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
                     return;
                 }
                 if (blocker.blockEquals(msg))
                 {
-                    Toast.makeText(ObjectBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
+                    Toast.makeText(EqualsDurationBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
                     return;
                 }
                 blocker.saveLastLegalTime(); //保存通过拦截的合法时间点，下次判断用到
