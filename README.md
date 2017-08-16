@@ -65,10 +65,7 @@ SDOnClickBlocker.setOnClickListener(findViewById(R.id.btn_private), 2000, new Vi
 ![](http://thumbsnap.com/i/KXXZyARA.gif?0815)<br>
 ```java
 final SDEqualsDurationBlocker blocker = new SDEqualsDurationBlocker();
-blocker.setBlockDuration(2000); //设置拦截间隔，既不管是否重复，最快只能2000毫秒触发一次
-blocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断和上一次重复之间的时长
-blocker.setBlockEqualsDuration(5000); //拦截重复的时长，既5000毫秒内不允许有重复的
-
+blocker.setMaxEqualsCount(0); //设置允许最大重复的次数0
 btn_send_msg.setOnClickListener(new View.OnClickListener()
 {
     @Override
@@ -80,13 +77,15 @@ btn_send_msg.setOnClickListener(new View.OnClickListener()
             Toast.makeText(EqualsDurationBlockerActivity.this, "请输入消息", 0).show();
             return;
         }
-        if (blocker.block())
+        if (blocker.block(2000))
         {
+            //拦截到间隔2000毫秒内的点击
             Toast.makeText(EqualsDurationBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
             return;
         }
-        if (blocker.blockEquals(msg))
+        if (blocker.blockEquals(msg) && blocker.block(5000))
         {
+            //拦截到超过最大重复次数，并且间隔5000毫秒内的点击
             Toast.makeText(EqualsDurationBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
             return;
         }
