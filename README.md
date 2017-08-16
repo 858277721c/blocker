@@ -3,12 +3,13 @@
 效果图：<br>
 ![](http://thumbsnap.com/i/deq8GrUH.gif?0815)<br>
 ```java
-final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
+final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置默认拦截间隔为1000毫秒
 btn_click.setOnClickListener(new View.OnClickListener()
 {
     @Override
     public void onClick(View v)
     {
+        //if (blocker.block(1000)) //动态指定拦截间隔为1000毫秒
         if (blocker.block())
         {
             //拦截掉
