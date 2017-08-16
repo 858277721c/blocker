@@ -3,18 +3,17 @@
 效果图：<br>
 ![](http://thumbsnap.com/i/deq8GrUH.gif?0815)<br>
 ```java
-final SDDurationBlocker mDurationBlocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
+final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
 btn_click.setOnClickListener(new View.OnClickListener()
 {
     @Override
     public void onClick(View v)
     {
-        if (mDurationBlocker.block())
+        if (blocker.block())
         {
             //拦截掉
             return;
         }
-
         mClickCount++;
         btn_click.setText(String.valueOf(mClickCount)); // 更新点击次数
     }
