@@ -28,19 +28,6 @@ public class SDEqualsBlocker
         this.mMaxEqualsCount = maxEqualsCount;
     }
 
-    private void saveLastObject(Object lastObject)
-    {
-        this.mLastObject = lastObject;
-    }
-
-    /**
-     * 重置equals相同的次数
-     */
-    public synchronized void resetEqualsCount()
-    {
-        mEqualsCount = 0;
-    }
-
     /**
      * 触发对象拦截
      *
@@ -66,4 +53,16 @@ public class SDEqualsBlocker
         return false;
     }
 
+    /**
+     * 重置equals相同的次数
+     */
+    private void resetEqualsCount()
+    {
+        mEqualsCount = 0;
+    }
+
+    private void saveLastObject(Object lastObject)
+    {
+        this.mLastObject = lastObject;
+    }
 }
