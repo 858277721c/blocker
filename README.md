@@ -102,8 +102,8 @@ btn_send_msg.setOnClickListener(new View.OnClickListener()
 当调用postDelayed方法post一个延迟Runable之后，会有以下3种情况：<br>
 1. 如果在延迟间隔内没有再次post，则延迟间隔到后执行该Runnable
 2. 如果在延迟间隔内再次post，并且拦截次数小于最大拦截次数，则取消已经post的延迟Runnable，重新post当前延迟Runnable，拦截次数加一
-3. 如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数
+3. 如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
 模拟效果图：<br>
-~[](http://thumbsnap.com/i/9DphluuT.gif?0815)
+![](http://thumbsnap.com/i/9DphluuT.gif?0815)
 
 
