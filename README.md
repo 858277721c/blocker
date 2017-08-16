@@ -23,7 +23,7 @@ btn_click.setOnClickListener(new View.OnClickListener()
 ## SDOnClickBlocker
 内部基于SDDurationBlocker实现的点击拦截，可以设置全局拦截间隔和单独对某个view设置拦截间隔<br>
 效果图：<br>
-![](http://thumbsnap.com/i/iUZuaXlg.gif?0815)<br>
+![](http://thumbsnap.com/i/Sz7tFHWT.gif?0815)<br>
 ```java
 //未拦截Button
 findViewById(R.id.btn_normal).setOnClickListener(new View.OnClickListener()
