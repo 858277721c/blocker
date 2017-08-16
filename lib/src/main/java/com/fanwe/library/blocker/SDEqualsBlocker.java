@@ -3,7 +3,7 @@ package com.fanwe.library.blocker;
 /**
  * 可以根据对象equals()的次数拦截事件
  */
-public class SDEqualsBlocker
+public class SDEqualsBlocker implements ISDEqualsBlocker
 {
     /**
      * 最后一次通过拦截的合法对象
@@ -22,32 +22,25 @@ public class SDEqualsBlocker
      */
     private boolean mAutoSaveLastLegalObject = true;
 
-    /**
-     * 设置最大可以equals的次数
-     *
-     * @param maxEqualsCount
-     */
+    @Override
     public synchronized void setMaxEqualsCount(int maxEqualsCount)
     {
-        this.mMaxEqualsCount = maxEqualsCount;
+        mMaxEqualsCount = maxEqualsCount;
     }
 
-    /**
-     * 设置是否自动保存最后一次通过拦截的合法对象，默认自动保存
-     *
-     * @param autoSaveLastLegalObject true-自动保存
-     */
+    @Override
     public synchronized void setAutoSaveLastLegalObject(boolean autoSaveLastLegalObject)
     {
         mAutoSaveLastLegalObject = autoSaveLastLegalObject;
     }
 
-    /**
-     * 触发equals对象拦截
-     *
-     * @param object
-     * @return true-拦截掉
-     */
+    @Override
+    public synchronized void saveLastLegalObject(Object lastLegalObject)
+    {
+        mLastLegalObject = lastLegalObject;
+    }
+
+    @Override
     public synchronized boolean blockEquals(Object object)
     {
         if (mLastLegalObject.equals(object))
@@ -68,15 +61,5 @@ public class SDEqualsBlocker
             saveLastLegalObject(object);
         }
         return false;
-    }
-
-    /**
-     * 保存最后一次通过拦截的合法对象
-     *
-     * @param lastLegalObject
-     */
-    public synchronized void saveLastLegalObject(Object lastLegalObject)
-    {
-        mLastLegalObject = lastLegalObject;
     }
 }

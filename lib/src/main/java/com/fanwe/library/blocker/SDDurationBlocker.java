@@ -6,11 +6,6 @@ package com.fanwe.library.blocker;
 public class SDDurationBlocker implements ISDDurationBlocker
 {
     /**
-     * 默认拦截间隔
-     */
-    public static final long DEFAULT_BLOCK_DURATION = 500;
-
-    /**
      * 拦截间隔
      */
     private long mBlockDuration;

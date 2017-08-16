@@ -1,10 +1,15 @@
 package com.fanwe.library.blocker;
 
 /**
- * Created by Administrator on 2017/8/16.
+ * 可以根据时间间隔来拦截事件
  */
 public interface ISDDurationBlocker
 {
+    /**
+     * 默认拦截间隔
+     */
+    long DEFAULT_BLOCK_DURATION = 500;
+
     /**
      * 设置拦截间隔
      *
