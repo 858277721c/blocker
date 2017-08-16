@@ -36,7 +36,7 @@ public class RunnableBlockerActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                mBlocker.postDelayed(mTargetRunnable, 3000); //延迟3000毫秒后执行Runnable
+                mBlocker.postDelayed(mTargetRunnable, 3000); //尝试post一个3000毫秒后执行的Runnable
 
                 mRequestCount++;
                 tv_block_msg.setText("请求执行次数：" + mRequestCount);
