@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickEqualsDuration"
-        android:text="Object拦截demo"/>
+        android:text="EqualsDuration拦截demo"/>
 
     <Button
         android:layout_width="match_parent"
