@@ -30,7 +30,7 @@ public class ObjectBlockerActivity extends AppCompatActivity
         final SDObjectBlocker mObjectBlocker = new SDObjectBlocker();
         mObjectBlocker.setBlockDuration(2000); //设置拦截间隔，既不管是否重复，最快只能2000毫秒触发一次
         mObjectBlocker.setMaxEqualsCount(0); //设置允许最大重复的次数0，既一重复就判断和上一次重复之间的时长
-        mObjectBlocker.setBlockEqualsObjectDuration(5000); //拦截重复的时长，既5000毫秒内不允许有重复的
+        mObjectBlocker.setBlockEqualsDuration(5000); //拦截重复的时长，既5000毫秒内不允许有重复的
 
         btn_send_msg.setOnClickListener(new View.OnClickListener()
         {

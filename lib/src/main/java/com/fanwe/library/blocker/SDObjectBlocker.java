@@ -12,7 +12,7 @@ public class SDObjectBlocker extends SDDurationBlocker
     /**
      * 拦截equals相同对象的时间间隔
      */
-    private long mBlockEqualsObjectDuration;
+    private long mBlockEqualsDuration;
     /**
      * 最大可以equals的次数
      */
@@ -31,11 +31,11 @@ public class SDObjectBlocker extends SDDurationBlocker
     /**
      * 设置拦截equals相同对象的时间间隔
      *
-     * @param blockEqualsObjectDuration
+     * @param blockEqualsDuration
      */
-    public synchronized void setBlockEqualsObjectDuration(long blockEqualsObjectDuration)
+    public synchronized void setBlockEqualsDuration(long blockEqualsDuration)
     {
-        this.mBlockEqualsObjectDuration = blockEqualsObjectDuration;
+        this.mBlockEqualsDuration = blockEqualsDuration;
     }
 
     /**
@@ -43,10 +43,10 @@ public class SDObjectBlocker extends SDDurationBlocker
      *
      * @return
      */
-    public synchronized boolean isInBlockEqualsObjectDuration()
+    public synchronized boolean isInBlockEqualsDuration()
     {
         long duration = System.currentTimeMillis() - getLastBlockTime();
-        return duration < mBlockEqualsObjectDuration;
+        return duration < mBlockEqualsDuration;
     }
 
     /**
@@ -85,7 +85,7 @@ public class SDObjectBlocker extends SDDurationBlocker
             mEqualsCount++;
             if (mEqualsCount > mMaxEqualsCount)
             {
-                if (isInBlockEqualsObjectDuration())
+                if (isInBlockEqualsDuration())
                 {
                     mEqualsCount--;
                     return true;
