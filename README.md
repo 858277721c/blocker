@@ -3,18 +3,17 @@
 效果图：<br>
 ![](http://thumbsnap.com/i/deq8GrUH.gif?0815)<br>
 ```java
-final SDDurationBlocker mDurationBlocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
+final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
 btn_click.setOnClickListener(new View.OnClickListener()
 {
     @Override
     public void onClick(View v)
     {
-        if (mDurationBlocker.block())
+        if (blocker.block())
         {
             //拦截掉
             return;
         }
-
         mClickCount++;
         btn_click.setText(String.valueOf(mClickCount)); // 更新点击次数
     }
@@ -98,3 +97,13 @@ btn_send_msg.setOnClickListener(new View.OnClickListener()
     }
 });
 ```
+## SDRunnableBlocker
+当某一种耗性能的相同任务需要频繁被执行的时候，可以用这个类来限制执行的频率<br>
+当调用postDelayed方法post一个延迟Runable之后，会有以下3种情况：<br>
+1. 如果在延迟间隔内没有再次post，则延迟间隔到后执行该Runnable
+2. 如果在延迟间隔内再次post，并且拦截次数小于最大拦截次数，则取消已经post的延迟Runnable，重新post当前延迟Runnable，拦截次数加一
+3. 如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
+模拟效果图：<br>
+![](http://thumbsnap.com/i/9DphluuT.gif?0815)
+
+
