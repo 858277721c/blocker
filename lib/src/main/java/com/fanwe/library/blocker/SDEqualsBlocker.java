@@ -60,7 +60,7 @@ public class SDEqualsBlocker
             }
         } else
         {
-            resetEqualsCount();
+            mEqualsCount = 0;
         }
 
         if (mAutoSaveLastLegalObject)
@@ -68,14 +68,6 @@ public class SDEqualsBlocker
             saveLastLegalObject(object);
         }
         return false;
-    }
-
-    /**
-     * 重置equals相同的次数
-     */
-    private void resetEqualsCount()
-    {
-        mEqualsCount = 0;
     }
 
     /**
