@@ -6,9 +6,9 @@ package com.fanwe.library.blocker;
 public class SDEqualsBlocker
 {
     /**
-     * 最后一次保存的equals相同的对象
+     * 最后一次保存的对象
      */
-    private Object mLastEqualsObject = new Object();
+    private Object mLastObject = new Object();
     /**
      * 最大可以equals的次数
      */
@@ -30,7 +30,7 @@ public class SDEqualsBlocker
 
     private void saveLastObject(Object lastObject)
     {
-        this.mLastEqualsObject = lastObject;
+        this.mLastObject = lastObject;
     }
 
     /**
@@ -49,7 +49,7 @@ public class SDEqualsBlocker
      */
     public synchronized boolean blockObject(Object object)
     {
-        if (mLastEqualsObject.equals(object))
+        if (mLastObject.equals(object))
         {
             mEqualsCount++;
             if (mEqualsCount > mMaxEqualsCount)
