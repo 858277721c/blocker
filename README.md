@@ -104,6 +104,36 @@ btn_send_msg.setOnClickListener(new View.OnClickListener()
 2. 如果在延迟间隔内再次post，并且拦截次数小于最大拦截次数，则取消已经post的延迟Runnable，重新post当前延迟Runnable，拦截次数加一
 3. 如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
 模拟效果图：<br>
-![](http://thumbsnap.com/i/9DphluuT.gif?0815)
+![](http://thumbsnap.com/i/9DphluuT.gif?0815)<br>
+```java
+public void onClickStart500(View view)
+{
+    mBlocker.setMaxBlockCount(3); //设置延迟间隔内最大可以拦截3次，超过3次则立即执行
+    mLooper.start(500, new Runnable() //模拟每隔500毫秒请求执行一次的场景
+    {
+        @Override
+        public void run()
+        {
+            mBlocker.postDelayed(mTargetRunnable, 3000); //尝试post一个3000毫秒后执行的Runnable
+
+            mRequestCount++;
+            tv_block_msg.setText("请求执行次数：" + mRequestCount);
+        }
+    });
+}
+
+/**
+ * 模拟耗性能Runnable
+ */
+private Runnable mTargetRunnable = new Runnable()
+{
+    @Override
+    public void run()
+    {
+        mRealCount++;
+        tv_msg.setText("实际执行次数：" + String.valueOf(mRealCount));
+    }
+};
+```
 
 
