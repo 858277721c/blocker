@@ -25,8 +25,8 @@ public class RunnableBlockerActivity extends AppCompatActivity
     }
 
     private ISDLooper mLooper = new SDSimpleLooper();
-    private int mRequestCount;
-    private int mRealCount;
+    private int mRequestCount; //请求执行次数
+    private int mRealCount; // 实际执行次数
 
     public void onClickStart500(View view)
     {

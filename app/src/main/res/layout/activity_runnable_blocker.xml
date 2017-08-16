@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickStart500"
-        android:text="模拟500毫秒触发一次请求"/>
+        android:text="模拟500毫秒触发一次耗性能请求"/>
 
     <TextView
         android:id="@+id/tv_block_msg"
