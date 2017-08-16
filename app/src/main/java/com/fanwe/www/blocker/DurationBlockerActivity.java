@@ -19,12 +19,13 @@ public class DurationBlockerActivity extends AppCompatActivity
         setContentView(R.layout.activity_duration_blocker);
         btn_click = (Button) findViewById(R.id.btn_click);
 
-        final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置拦截间隔为1000
+        final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置默认拦截间隔为1000毫秒
         btn_click.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                //if (blocker.block(1000)) //动态指定拦截间隔为1000毫秒
                 if (blocker.block())
                 {
                     //拦截掉
