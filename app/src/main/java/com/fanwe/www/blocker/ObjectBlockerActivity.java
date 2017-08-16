@@ -43,19 +43,18 @@ public class ObjectBlockerActivity extends AppCompatActivity
                     Toast.makeText(ObjectBlockerActivity.this, "请输入消息", 0).show();
                     return;
                 }
-                if (blocker.blockEquals(msg))
-                {
-                    Toast.makeText(ObjectBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
-                    return;
-                }
                 if (blocker.block())
                 {
                     Toast.makeText(ObjectBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
                     return;
                 }
+                if (blocker.blockEquals(msg))
+                {
+                    Toast.makeText(ObjectBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();
+                    return;
+                }
                 blocker.saveLastLegalTime(); //保存通过拦截的合法时间点，下次判断用到
                 blocker.saveLastLegalObject(msg); //保存通过拦截的合法对象，下次判断用到
-
 
                 tv_msg.append("\r\n" + msg);
             }
