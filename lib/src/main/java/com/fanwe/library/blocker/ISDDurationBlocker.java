@@ -11,14 +11,14 @@ public interface ISDDurationBlocker
     long DEFAULT_BLOCK_DURATION = 500;
 
     /**
-     * 设置拦截间隔
+     * 设置默认的拦截间隔
      *
      * @param blockDuration 拦截间隔（毫秒）
      */
     void setBlockDuration(long blockDuration);
 
     /**
-     * 获得拦截间隔（毫秒）
+     * 返回默认的拦截间隔（毫秒）
      *
      * @return
      */
