@@ -58,9 +58,11 @@ public class SDEqualsBlocker
                 mEqualsCount--;
                 return true;
             }
+        } else
+        {
+            resetEqualsCount();
         }
 
-        resetEqualsCount();
         if (mAutoSaveLastLegalObject)
         {
             saveLastLegalObject(object);
