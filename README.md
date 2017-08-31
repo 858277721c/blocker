@@ -1,3 +1,6 @@
+## Gradle
+`compile 'com.fanwe.android:blocker:1.0.1'`
+
 ## SDDurationBlocker
 应用场景：限制频繁触发的任务，比如点击拦截<br>
 效果图：<br>
