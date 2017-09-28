@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.library.blocker.SDRunnableBlocker;
+import com.fanwe.lib.blocker.SDRunnableBlocker;
 import com.fanwe.library.looper.ISDLooper;
 import com.fanwe.library.looper.impl.SDSimpleLooper;
 

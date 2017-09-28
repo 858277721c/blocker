@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.blocker;
+package com.fanwe.lib.blocker;
 
 /**
  * 可以根据时间间隔和对象equals()是否相等来拦截事件

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.library.blocker.SDOnClickBlocker;
+import com.fanwe.lib.blocker.SDOnClickBlocker;
 
 public class OnClickBlockerActivity extends AppCompatActivity
 {

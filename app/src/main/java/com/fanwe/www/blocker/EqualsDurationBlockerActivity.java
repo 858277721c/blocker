@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fanwe.library.blocker.SDEqualsDurationBlocker;
+import com.fanwe.lib.blocker.SDEqualsDurationBlocker;
 
 public class EqualsDurationBlockerActivity extends AppCompatActivity
 {
