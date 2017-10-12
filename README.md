@@ -1,17 +1,5 @@
 ## Gradle
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-
-dependencies {
-        compile 'com.github.zj565061763:blocker:1.0.3'
-}
-
-```
+[![](https://jitpack.io/v/zj565061763/blocker.svg)](https://jitpack.io/#zj565061763/blocker)
 
 ## SDDurationBlocker
 应用场景：限制频繁触发的任务，比如点击拦截<br>
