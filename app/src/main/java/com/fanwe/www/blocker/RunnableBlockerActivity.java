@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.fanwe.lib.blocker.SDRunnableBlocker;
-import com.fanwe.library.looper.ISDLooper;
-import com.fanwe.library.looper.impl.SDSimpleLooper;
+import com.fanwe.lib.looper.ISDLooper;
+import com.fanwe.lib.looper.impl.SDSimpleLooper;
 
 public class RunnableBlockerActivity extends AppCompatActivity
 {
