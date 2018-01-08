@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.fanwe.lib.blocker.SDDurationBlocker;
+import com.fanwe.lib.blocker.FDurationBlocker;
 
 public class DurationBlockerActivity extends AppCompatActivity
 {
@@ -19,7 +19,7 @@ public class DurationBlockerActivity extends AppCompatActivity
         setContentView(R.layout.activity_duration_blocker);
         btn_click = (Button) findViewById(R.id.btn_click);
 
-        final SDDurationBlocker blocker = new SDDurationBlocker(1000); //设置默认拦截间隔为1000毫秒
+        final FDurationBlocker blocker = new FDurationBlocker(1000); //设置默认拦截间隔为1000毫秒
         btn_click.setOnClickListener(new View.OnClickListener()
         {
             @Override

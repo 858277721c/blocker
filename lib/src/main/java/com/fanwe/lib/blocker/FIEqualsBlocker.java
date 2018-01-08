@@ -18,7 +18,7 @@ package com.fanwe.lib.blocker;
 /**
  * 可以根据对象equals()的次数拦截事件
  */
-public interface ISDEqualsBlocker
+public interface FIEqualsBlocker
 {
     /**
      * 设置最大可以equals的次数

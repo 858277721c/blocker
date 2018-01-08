@@ -18,12 +18,12 @@ package com.fanwe.lib.blocker;
 /**
  * 可以根据时间间隔和对象equals()是否相等来拦截事件
  */
-public class SDEqualsDurationBlocker implements ISDEqualsBlocker, ISDDurationBlocker
+public class FEqualsDurationBlocker implements FIEqualsBlocker, FIDurationBlocker
 {
-    private ISDEqualsBlocker mEqualsBlocker = new SDEqualsBlocker();
-    private ISDDurationBlocker mDurationBlocker = new SDDurationBlocker();
+    private FIEqualsBlocker mEqualsBlocker = new FEqualsBlocker();
+    private FIDurationBlocker mDurationBlocker = new FDurationBlocker();
 
-    public SDEqualsDurationBlocker()
+    public FEqualsDurationBlocker()
     {
         super();
         setAutoSaveLastLegalObject(false);

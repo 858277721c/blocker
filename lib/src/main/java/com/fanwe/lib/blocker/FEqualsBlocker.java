@@ -18,7 +18,7 @@ package com.fanwe.lib.blocker;
 /**
  * 可以根据对象equals()的次数拦截事件
  */
-public class SDEqualsBlocker implements ISDEqualsBlocker
+public class FEqualsBlocker implements FIEqualsBlocker
 {
     /**
      * 最后一次通过拦截的合法对象

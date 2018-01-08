@@ -18,7 +18,7 @@ package com.fanwe.lib.blocker;
 /**
  * 可以根据时间间隔来拦截事件的类
  */
-public class SDDurationBlocker implements ISDDurationBlocker
+public class FDurationBlocker implements FIDurationBlocker
 {
     /**
      * 拦截间隔
@@ -33,12 +33,12 @@ public class SDDurationBlocker implements ISDDurationBlocker
      */
     private boolean mAutoSaveLastLegalTime = true;
 
-    public SDDurationBlocker()
+    public FDurationBlocker()
     {
         this(DEFAULT_BLOCK_DURATION);
     }
 
-    public SDDurationBlocker(long blockDuration)
+    public FDurationBlocker(long blockDuration)
     {
         super();
         setBlockDuration(blockDuration);

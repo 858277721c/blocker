@@ -26,7 +26,7 @@ import android.os.Looper;
  * 3.如果在延迟间隔内再次post，并且拦截次数大于最大拦截次数，则立即执行Runnable，重置拦截次数<br>
  * 在界面销毁的时候需要调用onDestroy()
  */
-public class SDRunnableBlocker
+public class FRunnableBlocker
 {
     /**
      * 最大拦截次数
@@ -45,7 +45,7 @@ public class SDRunnableBlocker
      * @param maxBlockCount
      * @return
      */
-    public synchronized SDRunnableBlocker setMaxBlockCount(int maxBlockCount)
+    public synchronized FRunnableBlocker setMaxBlockCount(int maxBlockCount)
     {
         mMaxBlockCount = maxBlockCount;
         return this;
@@ -118,7 +118,7 @@ public class SDRunnableBlocker
         @Override
         public void run()
         {
-            synchronized (SDRunnableBlocker.this)
+            synchronized (FRunnableBlocker.this)
             {
                 resetBlockCount();
                 if (mTargetRunnable != null)

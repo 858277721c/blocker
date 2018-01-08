@@ -18,7 +18,7 @@ package com.fanwe.lib.blocker;
 /**
  * 可以根据时间间隔来拦截事件
  */
-public interface ISDDurationBlocker
+public interface FIDurationBlocker
 {
     /**
      * 默认拦截间隔

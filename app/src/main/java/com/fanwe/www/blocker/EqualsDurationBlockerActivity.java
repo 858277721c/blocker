@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fanwe.lib.blocker.SDEqualsDurationBlocker;
+import com.fanwe.lib.blocker.FEqualsDurationBlocker;
 
 public class EqualsDurationBlockerActivity extends AppCompatActivity
 {
@@ -27,7 +27,7 @@ public class EqualsDurationBlockerActivity extends AppCompatActivity
         et = (EditText) findViewById(R.id.et);
         btn_send_msg = (Button) findViewById(R.id.btn_send_msg);
 
-        final SDEqualsDurationBlocker blocker = new SDEqualsDurationBlocker();
+        final FEqualsDurationBlocker blocker = new FEqualsDurationBlocker();
         blocker.setMaxEqualsCount(0); //设置允许最大重复的次数0
         btn_send_msg.setOnClickListener(new View.OnClickListener()
         {

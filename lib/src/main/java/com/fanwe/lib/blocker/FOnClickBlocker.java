@@ -20,14 +20,14 @@ import android.view.View;
 /**
  * OnClickListener点击拦截
  */
-public class SDOnClickBlocker
+public class FOnClickBlocker
 {
-    private static final SDDurationBlocker GLOBAL_BLOCKER = new SDDurationBlocker(500);
-    private SDDurationBlocker mPrivateBlocker;
+    private static final FDurationBlocker GLOBAL_BLOCKER = new FDurationBlocker(500);
+    private FDurationBlocker mPrivateBlocker;
 
     private View.OnClickListener mOriginal;
 
-    SDOnClickBlocker(View.OnClickListener original, long blockDuration)
+    FOnClickBlocker(View.OnClickListener original, long blockDuration)
     {
         this.mOriginal = original;
         if (blockDuration < 0)
@@ -35,7 +35,7 @@ public class SDOnClickBlocker
             //全局拦截
         } else
         {
-            mPrivateBlocker = new SDDurationBlocker();
+            mPrivateBlocker = new FDurationBlocker();
             mPrivateBlocker.setBlockDuration(blockDuration);
         }
     }
@@ -110,7 +110,7 @@ public class SDOnClickBlocker
             return;
         }
 
-        SDOnClickBlocker blocker = new SDOnClickBlocker(onClickListener, blockDuration);
+        FOnClickBlocker blocker = new FOnClickBlocker(onClickListener, blockDuration);
         view.setOnClickListener(blocker.mInternalOnClickListener);
     }
 

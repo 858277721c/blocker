@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.lib.blocker.SDRunnableBlocker;
+import com.fanwe.lib.blocker.FRunnableBlocker;
 import com.fanwe.lib.looper.ISDLooper;
 import com.fanwe.lib.looper.impl.SDSimpleLooper;
 
@@ -13,7 +13,7 @@ public class RunnableBlockerActivity extends AppCompatActivity
 {
     private TextView tv_block_msg, tv_msg;
 
-    private SDRunnableBlocker mBlocker = new SDRunnableBlocker();
+    private FRunnableBlocker mBlocker = new FRunnableBlocker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
