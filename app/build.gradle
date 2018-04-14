@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile project(':lib')
-    compile 'com.github.zj565061763:looper:1.0.7'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation project(':lib')
+    implementation 'com.github.zj565061763:looper:1.0.7'
 }
