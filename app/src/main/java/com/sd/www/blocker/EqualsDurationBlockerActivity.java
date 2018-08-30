@@ -1,4 +1,4 @@
-package com.fanwe.www.blocker;
+package com.sd.www.blocker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fanwe.lib.blocker.FEqualsDurationBlocker;
+import com.sd.lib.blocker.FEqualsDurationBlocker;
 
 public class EqualsDurationBlockerActivity extends AppCompatActivity
 {

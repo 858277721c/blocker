@@ -1,11 +1,11 @@
-package com.fanwe.www.blocker;
+package com.sd.www.blocker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.lib.blocker.FRunnableBlocker;
+import com.sd.lib.blocker.FRunnableBlocker;
 import com.sd.lib.looper.impl.FSimpleLooper;
 
 public class RunnableBlockerActivity extends AppCompatActivity

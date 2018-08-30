@@ -1,4 +1,4 @@
-package com.fanwe.www.blocker;
+package com.sd.www.blocker;
 
 import android.content.Intent;
 import android.os.Bundle;

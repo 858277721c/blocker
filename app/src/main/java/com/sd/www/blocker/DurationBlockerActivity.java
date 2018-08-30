@@ -1,11 +1,11 @@
-package com.fanwe.www.blocker;
+package com.sd.www.blocker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.fanwe.lib.blocker.FDurationBlocker;
+import com.sd.lib.blocker.FDurationBlocker;
 
 public class DurationBlockerActivity extends AppCompatActivity
 {
