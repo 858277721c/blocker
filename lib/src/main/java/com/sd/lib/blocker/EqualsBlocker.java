@@ -3,7 +3,7 @@ package com.sd.lib.blocker;
 /**
  * 可以根据对象equals()的次数拦截事件
  */
-public interface FIEqualsBlocker
+public interface EqualsBlocker
 {
     /**
      * 设置最大可以equals的次数
