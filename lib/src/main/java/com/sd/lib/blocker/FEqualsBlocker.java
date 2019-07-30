@@ -45,12 +45,10 @@ public class FEqualsBlocker implements EqualsBlocker
     {
         if (mLastLegalObject.equals(object))
         {
-            mEqualsCount++;
-            if (mEqualsCount > mMaxEqualsCount)
-            {
-                mEqualsCount--;
+            if ((mEqualsCount + 1) > mMaxEqualsCount)
                 return true;
-            }
+
+            mEqualsCount++;
         } else
         {
             mEqualsCount = 0;
