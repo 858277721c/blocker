@@ -12,8 +12,6 @@ public class DurationBlockerActivity extends AppCompatActivity
     private Button btn_click;
     private int mClickCount;
 
-    private final FDurationBlocker mBlocker = new FDurationBlocker();
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -21,14 +19,15 @@ public class DurationBlockerActivity extends AppCompatActivity
         setContentView(R.layout.activity_duration_blocker);
         btn_click = findViewById(R.id.btn_click);
 
+        final FDurationBlocker blocker = new FDurationBlocker();
         btn_click.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (mBlocker.blockDuration(1000))
+                if (blocker.blockDuration(1000))
                 {
-                    //拦截掉
+                    // 拦截掉1000毫秒内的点击
                     return;
                 }
 
