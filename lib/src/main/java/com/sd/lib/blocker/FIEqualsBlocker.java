@@ -8,23 +8,23 @@ public interface FIEqualsBlocker
     /**
      * 设置最大可以equals的次数
      *
-     * @param maxEqualsCount
+     * @param count
      */
-    void setMaxEqualsCount(int maxEqualsCount);
+    void setMaxEqualsCount(int count);
 
     /**
      * 设置是否自动保存最后一次通过拦截的合法对象，默认自动保存
      *
-     * @param autoSaveLastLegalObject true-自动保存
+     * @param save true-自动保存
      */
-    void setAutoSaveLastLegalObject(boolean autoSaveLastLegalObject);
+    void setAutoSaveLastLegalObject(boolean save);
 
     /**
      * 保存最后一次通过拦截的合法对象
      *
-     * @param lastLegalObject
+     * @param object
      */
-    void saveLastLegalObject(Object lastLegalObject);
+    void saveLastLegalObject(Object object);
 
     /**
      * 触发equals对象拦截

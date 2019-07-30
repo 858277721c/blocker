@@ -16,21 +16,21 @@ public class FEqualsDurationBlocker implements FIEqualsBlocker, FIDurationBlocke
     }
 
     @Override
-    public void setMaxEqualsCount(int maxEqualsCount)
+    public void setMaxEqualsCount(int count)
     {
-        mEqualsBlocker.setMaxEqualsCount(maxEqualsCount);
+        mEqualsBlocker.setMaxEqualsCount(count);
     }
 
     @Override
-    public void setAutoSaveLastLegalObject(boolean autoSaveLastLegalObject)
+    public void setAutoSaveLastLegalObject(boolean save)
     {
-        mEqualsBlocker.setAutoSaveLastLegalObject(autoSaveLastLegalObject);
+        mEqualsBlocker.setAutoSaveLastLegalObject(save);
     }
 
     @Override
-    public void saveLastLegalObject(Object lastLegalObject)
+    public void saveLastLegalObject(Object object)
     {
-        mEqualsBlocker.saveLastLegalObject(lastLegalObject);
+        mEqualsBlocker.saveLastLegalObject(object);
     }
 
     @Override

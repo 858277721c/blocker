@@ -23,21 +23,21 @@ public class FEqualsBlocker implements FIEqualsBlocker
     private boolean mAutoSaveLastLegalObject = true;
 
     @Override
-    public synchronized void setMaxEqualsCount(int maxEqualsCount)
+    public synchronized void setMaxEqualsCount(int count)
     {
-        mMaxEqualsCount = maxEqualsCount;
+        mMaxEqualsCount = count;
     }
 
     @Override
-    public synchronized void setAutoSaveLastLegalObject(boolean autoSaveLastLegalObject)
+    public synchronized void setAutoSaveLastLegalObject(boolean save)
     {
-        mAutoSaveLastLegalObject = autoSaveLastLegalObject;
+        mAutoSaveLastLegalObject = save;
     }
 
     @Override
-    public synchronized void saveLastLegalObject(Object lastLegalObject)
+    public synchronized void saveLastLegalObject(Object object)
     {
-        mLastLegalObject = lastLegalObject;
+        mLastLegalObject = object;
     }
 
     @Override
