@@ -6,18 +6,18 @@
 效果图：<br>
 ![](http://thumbsnap.com/i/deq8GrUH.gif?0815)<br>
 ```java
-final FDurationBlocker blocker = new FDurationBlocker(1000); //设置默认拦截间隔为1000毫秒
+final FDurationBlocker blocker = new FDurationBlocker();
 btn_click.setOnClickListener(new View.OnClickListener()
 {
     @Override
     public void onClick(View v)
     {
-        //if (blocker.block(1000)) //动态指定拦截间隔为1000毫秒
-        if (blocker.block())
+        if (blocker.blockDuration(1000))
         {
-            //拦截掉
+            // 拦截掉1000毫秒内的点击
             return;
         }
+
         mClickCount++;
         btn_click.setText(String.valueOf(mClickCount)); // 更新点击次数
     }
