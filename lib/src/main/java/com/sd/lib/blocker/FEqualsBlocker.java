@@ -37,6 +37,9 @@ public class FEqualsBlocker implements EqualsBlocker
     @Override
     public synchronized void saveLastLegalObject(Object object)
     {
+        if (object == null)
+            throw new IllegalArgumentException("object is null");
+
         mLastLegalObject = object;
     }
 
@@ -55,9 +58,8 @@ public class FEqualsBlocker implements EqualsBlocker
         }
 
         if (mAutoSaveLastLegalObject)
-        {
             saveLastLegalObject(object);
-        }
+
         return false;
     }
 }
