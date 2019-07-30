@@ -40,13 +40,13 @@ public class EqualsDurationBlockerActivity extends AppCompatActivity
                     Toast.makeText(EqualsDurationBlockerActivity.this, "请输入消息", 0).show();
                     return;
                 }
-                if (blocker.block(2000))
+                if (blocker.blockDuration(2000))
                 {
                     //拦截到间隔2000毫秒内的点击
                     Toast.makeText(EqualsDurationBlockerActivity.this, "消息间隔不能小于2秒", 0).show();
                     return;
                 }
-                if (blocker.blockEquals(msg) && blocker.block(5000))
+                if (blocker.blockEquals(msg) && blocker.blockDuration(5000))
                 {
                     //拦截到超过最大重复次数，并且间隔5000毫秒内的点击
                     Toast.makeText(EqualsDurationBlockerActivity.this, "重复消息间隔不能小于5秒", 0).show();

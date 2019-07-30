@@ -38,5 +38,5 @@ public interface DurationBlocker
      * @param duration 拦截间隔（毫秒）
      * @return true-拦截掉
      */
-    boolean block(long duration);
+    boolean blockDuration(long duration);
 }

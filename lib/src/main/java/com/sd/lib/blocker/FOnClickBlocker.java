@@ -28,7 +28,7 @@ public class FOnClickBlocker
         {
             if (mPrivateBlocker != null)
             {
-                if (mPrivateBlocker.block(mBlockDuration))
+                if (mPrivateBlocker.blockDuration(mBlockDuration))
                 {
                     //拦截掉
                 } else
@@ -37,7 +37,7 @@ public class FOnClickBlocker
                 }
             } else
             {
-                if (GLOBAL_BLOCKER.block(GLOBAL_BLOCK_DURATION))
+                if (GLOBAL_BLOCKER.blockDuration(GLOBAL_BLOCK_DURATION))
                 {
                     //拦截掉
                 } else

@@ -64,8 +64,8 @@ public class FEqualsDurationBlocker implements EqualsBlocker, DurationBlocker
     }
 
     @Override
-    public boolean block(long duration)
+    public boolean blockDuration(long duration)
     {
-        return mDurationBlocker.block(duration);
+        return mDurationBlocker.blockDuration(duration);
     }
 }

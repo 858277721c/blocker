@@ -26,7 +26,7 @@ public class DurationBlockerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (mBlocker.block(1000))
+                if (mBlocker.blockDuration(1000))
                 {
                     //拦截掉
                     return;

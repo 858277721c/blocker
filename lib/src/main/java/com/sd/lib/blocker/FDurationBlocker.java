@@ -40,7 +40,7 @@ public class FDurationBlocker implements DurationBlocker
     }
 
     @Override
-    public synchronized boolean block(long duration)
+    public synchronized boolean blockDuration(long duration)
     {
         if (isInBlockDuration(duration))
         {
