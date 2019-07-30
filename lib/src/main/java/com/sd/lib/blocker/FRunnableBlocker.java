@@ -13,58 +13,37 @@ import android.os.Looper;
  */
 public class FRunnableBlocker
 {
-    /**
-     * 最大拦截次数
-     */
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+    // 最大拦截次数
     private int mMaxBlockCount = 0;
-    /**
-     * 当前已拦截次数
-     */
+    // 当前已拦截次数
     private int mBlockCount = 0;
-    private InternalRunnable mInternalRunnable;
-    private Runnable mTargetRunnable;
+    // 要执行的对象
+    private Runnable mRunnable;
 
     /**
      * 设置最大拦截次数
      *
-     * @param maxBlockCount
      * @return
      */
-    public synchronized FRunnableBlocker setMaxBlockCount(int maxBlockCount)
+    public synchronized void setMaxBlockCount(int count)
     {
-        mMaxBlockCount = maxBlockCount;
-        return this;
+        mMaxBlockCount = count;
     }
 
     /**
-     * 返回最大拦截次数
-     *
-     * @return
-     */
-    public synchronized int getMaxBlockCount()
-    {
-        return mMaxBlockCount;
-    }
-
-    /**
-     * 返回已拦截次数
-     *
-     * @return
-     */
-    public synchronized int getBlockCount()
-    {
-        return mBlockCount;
-    }
-
-    /**
-     * 延迟执行Runnable
+     * 提交要执行的Runnable
      *
      * @param delay 延迟间隔（毫秒）
      * @return true-立即执行，false-延迟执行
      */
     public synchronized boolean postDelayed(Runnable runnable, long delay)
     {
-        mTargetRunnable = runnable;
+        if (runnable == null)
+            throw new IllegalArgumentException("runnable is null");
+
+        mRunnable = runnable;
 
         if (mMaxBlockCount > 0)
         {
@@ -72,82 +51,56 @@ public class FRunnableBlocker
             if (mBlockCount > mMaxBlockCount)
             {
                 // 大于最大拦截次数，立即执行Runnable
-                getInternalRunnable().runImmediately();
+                runImmediately();
                 return true;
             } else
             {
-                getInternalRunnable().runDelay(delay);
+                runDelayed(delay);
                 return false;
             }
         } else
         {
             // 没有设置最大拦截次数，立即执行Runnable
-            getInternalRunnable().runImmediately();
+            runImmediately();
             return true;
         }
     }
 
-    private InternalRunnable getInternalRunnable()
+    private void runImmediately()
     {
-        if (mInternalRunnable == null)
-        {
-            mInternalRunnable = new InternalRunnable();
-        }
-        return mInternalRunnable;
+        removeDelay();
+        mInternalRunnable.run();
     }
 
-    private class InternalRunnable implements Runnable
+    private void runDelayed(long delayMillis)
     {
-        private Handler mHandler = new Handler(Looper.getMainLooper());
+        removeDelay();
+        mHandler.postDelayed(mInternalRunnable, delayMillis);
+    }
 
+    private void removeDelay()
+    {
+        mHandler.removeCallbacks(mInternalRunnable);
+    }
+
+    private final Runnable mInternalRunnable = new Runnable()
+    {
         @Override
         public void run()
         {
             synchronized (FRunnableBlocker.this)
             {
-                resetBlockCount();
-                if (mTargetRunnable != null)
-                {
-                    mTargetRunnable.run();
-                }
+                mBlockCount = 0;
+                mRunnable.run();
             }
         }
-
-        public final void runImmediately()
-        {
-            removeDelay();
-            run();
-        }
-
-        public final void runDelay(long delay)
-        {
-            removeDelay();
-            mHandler.postDelayed(this, delay);
-        }
-
-        public final void removeDelay()
-        {
-            mHandler.removeCallbacks(this);
-        }
-    }
+    };
 
     /**
-     * 重置拦截次数
+     * 取消延迟任务
      */
-    private void resetBlockCount()
+    public void cancel()
     {
-        mBlockCount = 0;
-    }
-
-    /**
-     * 销毁
-     */
-    public synchronized void onDestroy()
-    {
-        if (mInternalRunnable != null)
-        {
-            mInternalRunnable.removeDelay();
-            mTargetRunnable = null;
-        }
+        removeDelay();
     }
 }
