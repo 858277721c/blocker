@@ -13,8 +13,10 @@ public class RunnableBlockerActivity extends AppCompatActivity
 
     private final FRunnableBlocker mBlocker = new FRunnableBlocker();
 
-    private int mRequestCount; //请求执行次数
-    private int mRealCount; // 实际执行次数
+    // 请求执行次数
+    private int mRequestCount;
+    // 实际执行次数
+    private int mRealCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,6 +55,7 @@ public class RunnableBlockerActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
+        // 取消延迟任务
         mBlocker.cancel();
     }
 }
