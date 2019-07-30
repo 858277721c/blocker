@@ -35,7 +35,7 @@ public class RunnableBlockerActivity extends AppCompatActivity
 
         // 模拟每隔500毫秒请求执行一次的场景
         mLooper.setInterval(500);
-        mLooper.setLoopRunnable(new Runnable()
+        mLooper.start(new Runnable()
         {
             @Override
             public void run()
@@ -45,7 +45,6 @@ public class RunnableBlockerActivity extends AppCompatActivity
                 tv_block_msg.setText("请求执行次数：" + mRequestCount);
             }
         });
-        mLooper.start();
     }
 
     /**

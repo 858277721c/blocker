@@ -7,32 +7,28 @@ import android.view.View;
  */
 public class FOnClickBlocker
 {
-    private static final FDurationBlocker GLOBAL_BLOCKER = new FDurationBlocker(500);
-    private FDurationBlocker mPrivateBlocker;
+    private static long GLOBAL_BLOCK_DURATION = 500;
+    private static final FDurationBlocker GLOBAL_BLOCKER = new FDurationBlocker();
 
-    private View.OnClickListener mOriginal;
+    private final View.OnClickListener mOriginal;
+    private final FDurationBlocker mPrivateBlocker;
+    private final long mBlockDuration;
 
     FOnClickBlocker(View.OnClickListener original, long blockDuration)
     {
-        this.mOriginal = original;
-        if (blockDuration < 0)
-        {
-            //全局拦截
-        } else
-        {
-            mPrivateBlocker = new FDurationBlocker();
-            mPrivateBlocker.setBlockDuration(blockDuration);
-        }
+        mOriginal = original;
+        mPrivateBlocker = blockDuration < 0 ? null : new FDurationBlocker();
+        mBlockDuration = blockDuration;
     }
 
-    View.OnClickListener mInternalOnClickListener = new View.OnClickListener()
+    final View.OnClickListener mInternalOnClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
         {
             if (mPrivateBlocker != null)
             {
-                if (mPrivateBlocker.block())
+                if (mPrivateBlocker.block(mBlockDuration))
                 {
                     //拦截掉
                 } else
@@ -41,7 +37,7 @@ public class FOnClickBlocker
                 }
             } else
             {
-                if (GLOBAL_BLOCKER.block())
+                if (GLOBAL_BLOCKER.block(GLOBAL_BLOCK_DURATION))
                 {
                     //拦截掉
                 } else
@@ -59,7 +55,7 @@ public class FOnClickBlocker
      */
     public static void setGlobalBlockDuration(long blockDuration)
     {
-        GLOBAL_BLOCKER.setBlockDuration(blockDuration);
+        GLOBAL_BLOCK_DURATION = blockDuration;
     }
 
     /**
@@ -77,7 +73,7 @@ public class FOnClickBlocker
      * 设置拦截view的点击事件<br>
      * 当blockDuration大于0：按设置的时间间隔拦截当前view<br>
      * 当blockDuration等于0：不拦截当前view<br>
-     * 当blockDuration小于0：按全局设置的间隔拦截当前view（默认500毫秒）
+     * 当blockDuration小于0：全局拦截当前view（默认500毫秒）
      *
      * @param view
      * @param blockDuration   拦截间隔
@@ -86,17 +82,15 @@ public class FOnClickBlocker
     public static void setOnClickListener(View view, long blockDuration, View.OnClickListener onClickListener)
     {
         if (view == null)
-        {
             return;
-        }
+
         if (onClickListener == null)
         {
             view.setOnClickListener(null);
             return;
         }
 
-        FOnClickBlocker blocker = new FOnClickBlocker(onClickListener, blockDuration);
+        final FOnClickBlocker blocker = new FOnClickBlocker(onClickListener, blockDuration);
         view.setOnClickListener(blocker.mInternalOnClickListener);
     }
-
 }

@@ -5,8 +5,8 @@ package com.sd.lib.blocker;
  */
 public class FEqualsDurationBlocker implements EqualsBlocker, DurationBlocker
 {
-    private EqualsBlocker mEqualsBlocker = new FEqualsBlocker();
-    private DurationBlocker mDurationBlocker = new FDurationBlocker();
+    private final EqualsBlocker mEqualsBlocker = new FEqualsBlocker();
+    private final DurationBlocker mDurationBlocker = new FDurationBlocker();
 
     public FEqualsDurationBlocker()
     {
@@ -40,18 +40,6 @@ public class FEqualsDurationBlocker implements EqualsBlocker, DurationBlocker
     }
 
     @Override
-    public void setBlockDuration(long blockDuration)
-    {
-        mDurationBlocker.setBlockDuration(blockDuration);
-    }
-
-    @Override
-    public long getBlockDuration()
-    {
-        return mDurationBlocker.getBlockDuration();
-    }
-
-    @Override
     public void saveLastLegalTime()
     {
         mDurationBlocker.saveLastLegalTime();
@@ -64,26 +52,20 @@ public class FEqualsDurationBlocker implements EqualsBlocker, DurationBlocker
     }
 
     @Override
-    public void setAutoSaveLastLegalTime(boolean autoSaveLastLegalTime)
+    public void setAutoSaveLastLegalTime(boolean save)
     {
-        mDurationBlocker.setAutoSaveLastLegalTime(autoSaveLastLegalTime);
+        mDurationBlocker.setAutoSaveLastLegalTime(save);
     }
 
     @Override
-    public boolean isInBlockDuration(long blockDuration)
+    public boolean isInBlockDuration(long duration)
     {
-        return mDurationBlocker.isInBlockDuration(blockDuration);
+        return mDurationBlocker.isInBlockDuration(duration);
     }
 
     @Override
-    public boolean block()
+    public boolean block(long duration)
     {
-        return mDurationBlocker.block();
-    }
-
-    @Override
-    public boolean block(long blockDuration)
-    {
-        return mDurationBlocker.block(blockDuration);
+        return mDurationBlocker.block(duration);
     }
 }

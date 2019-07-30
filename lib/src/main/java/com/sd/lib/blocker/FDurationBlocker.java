@@ -6,10 +6,6 @@ package com.sd.lib.blocker;
 public class FDurationBlocker implements DurationBlocker
 {
     /**
-     * 拦截间隔
-     */
-    private long mBlockDuration;
-    /**
      * 最后一次通过拦截的合法时间点
      */
     private long mLastLegalTime;
@@ -17,33 +13,6 @@ public class FDurationBlocker implements DurationBlocker
      * 是否自动保存最后一次通过拦截的合法时间点，默认自动保存
      */
     private boolean mAutoSaveLastLegalTime = true;
-
-    public FDurationBlocker()
-    {
-        this(DEFAULT_BLOCK_DURATION);
-    }
-
-    public FDurationBlocker(long blockDuration)
-    {
-        super();
-        setBlockDuration(blockDuration);
-    }
-
-    @Override
-    public synchronized void setBlockDuration(long blockDuration)
-    {
-        if (blockDuration < 0)
-        {
-            blockDuration = 0;
-        }
-        mBlockDuration = blockDuration;
-    }
-
-    @Override
-    public long getBlockDuration()
-    {
-        return mBlockDuration;
-    }
 
     @Override
     public synchronized void saveLastLegalTime()
@@ -58,37 +27,30 @@ public class FDurationBlocker implements DurationBlocker
     }
 
     @Override
-    public synchronized void setAutoSaveLastLegalTime(boolean autoSaveLastLegalTime)
+    public synchronized void setAutoSaveLastLegalTime(boolean save)
     {
-        mAutoSaveLastLegalTime = autoSaveLastLegalTime;
+        mAutoSaveLastLegalTime = save;
     }
 
     @Override
     public synchronized boolean isInBlockDuration(long blockDuration)
     {
-        long duration = System.currentTimeMillis() - mLastLegalTime;
+        final long duration = System.currentTimeMillis() - mLastLegalTime;
         return duration < blockDuration;
     }
 
     @Override
-    public boolean block()
+    public synchronized boolean block(long duration)
     {
-        return block(mBlockDuration);
-    }
-
-    @Override
-    public synchronized boolean block(long blockDuration)
-    {
-        if (isInBlockDuration(blockDuration))
+        if (isInBlockDuration(duration))
         {
             // 拦截掉
             return true;
         }
 
         if (mAutoSaveLastLegalTime)
-        {
             saveLastLegalTime();
-        }
+
         return false;
     }
 }
