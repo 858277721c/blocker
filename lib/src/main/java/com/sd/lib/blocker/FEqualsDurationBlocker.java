@@ -3,10 +3,10 @@ package com.sd.lib.blocker;
 /**
  * 可以根据时间间隔和对象equals()是否相等来拦截事件
  */
-public class FEqualsDurationBlocker implements EqualsBlocker, FIDurationBlocker
+public class FEqualsDurationBlocker implements EqualsBlocker, DurationBlocker
 {
     private EqualsBlocker mEqualsBlocker = new FEqualsBlocker();
-    private FIDurationBlocker mDurationBlocker = new FDurationBlocker();
+    private DurationBlocker mDurationBlocker = new FDurationBlocker();
 
     public FEqualsDurationBlocker()
     {

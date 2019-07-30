@@ -3,7 +3,7 @@ package com.sd.lib.blocker;
 /**
  * 可以根据时间间隔来拦截事件的类
  */
-public class FDurationBlocker implements FIDurationBlocker
+public class FDurationBlocker implements DurationBlocker
 {
     /**
      * 拦截间隔
